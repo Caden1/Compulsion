@@ -17,9 +17,8 @@ public class PickupObject : MonoBehaviour {
         mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag
         
 	}
-
-    // FixedUpdate is called every fixed framerate frame
-    void FixedUpdate ()
+		
+    void FixedUpdate()
     {
 	    if (carrying)
         {
@@ -43,7 +42,7 @@ public class PickupObject : MonoBehaviour {
 
     private void Pickup()
     {
-        if (Input.GetMouseButtonDown(0)) // On left click
+        if (Input.GetMouseButton(0)) // On left click hold
         {
             // Middle of Screen
             int x = Screen.width / 2;
@@ -62,16 +61,16 @@ public class PickupObject : MonoBehaviour {
                 if (hit.distance <= pickupRange)
                 {
                     // Checks if object has the Pickupable script
-                    Pickupable p = hit.collider.GetComponent<Pickupable>();
+                    //Pickupable p = hit.collider.GetComponent<Pickupable>();
 
 
-                    if (p != null)
+					if (hit.collider.tag == "Pickupable") // Objects that can be held need the "Pickupable" tag
                     {
                         carrying = true;
-                        carriedObject = p.gameObject;
+						carriedObject = hit.collider.gameObject;
 
                         // While carrying, object is unaffected by gravity
-                        p.gameObject.GetComponent<Rigidbody>().useGravity = false;
+						hit.collider.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     }
                 }
             }
@@ -80,7 +79,7 @@ public class PickupObject : MonoBehaviour {
 
     private void DropObject()
     {
-        if (Input.GetMouseButtonDown(1)) // On left click
+        if (Input.GetMouseButtonUp(0)) // On left click up
         {
             carrying = false;
             carriedObject.gameObject.GetComponent<Rigidbody>().useGravity = true;
