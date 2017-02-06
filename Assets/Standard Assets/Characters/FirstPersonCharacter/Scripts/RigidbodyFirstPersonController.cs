@@ -8,6 +8,13 @@ namespace UnityStandardAssets.Characters.FirstPerson
     [RequireComponent(typeof (CapsuleCollider))]
     public class RigidbodyFirstPersonController : MonoBehaviour
     {
+
+
+		[HideInInspector] public bool forcedLook = false; // ADDED BY CADEN. For being able to manipulate where the camera looks
+
+
+
+
         [Serializable]
         public class MovementSettings
         {
@@ -128,7 +135,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
-            RotateView();
+			if (forcedLook == false) // ADDED BY CADEN. Only rotate camera if not trying to force look
+			{
+				RotateView();
+			}
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
