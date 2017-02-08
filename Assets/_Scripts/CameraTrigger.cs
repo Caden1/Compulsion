@@ -5,9 +5,12 @@ using UnityStandardAssets.Characters.FirstPerson; // NEED THIS TO USE THE Rigidb
 
 public class CameraTrigger : MonoBehaviour 
 {
+	/* (FOR FOCUSING IN ON THE OCD TASK)
 	public Transform targetToLookAt; // Drag-in the target object in the Inspector
+	*/
 
 	private GameObject mainCamera;
+	private GameObject camera2;
 	private GameObject player;
 	private RigidbodyFirstPersonController FPController;
 
@@ -15,19 +18,19 @@ public class CameraTrigger : MonoBehaviour
 	void Start () 
 	{
 		mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag
+		camera2 = GameObject.FindWithTag("Camera2"); // Sets the 2nd camera to variable camera2 by finding its tag
 		player = GameObject.FindWithTag("Player"); // Finds the player
-		FPController = player.GetComponent<RigidbodyFirstPersonController> ();
-		//RFC = player.GetComponent<RigidbodyFirstPersonController> ();
+		FPController = player.GetComponent<RigidbodyFirstPersonController> (); // Gives access to the RigidbodyFirstPersonController script
 	}
 
 	void OnTriggerStay(Collider other) // While player is still in the trigger
 	{
 		if (other.tag == "Player") 
 		{
-			FPController.forcedLook = true;
-			mainCamera.transform.LookAt(targetToLookAt);
-			//mainCamera.transform.rotation = Quaternion.SetFromToRotation(gameObject.transform.position, rotateTowards.position);
-			//Debug.Log(gameObject.transform.rotation);
+			/* (FOR FOCUSING IN ON THE OCD TASK)
+			//FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
+			//mainCamera.transform.LookAt(targetToLookAt); // Focus on the OCD task
+			*/
 		}
 	}
 
@@ -35,7 +38,9 @@ public class CameraTrigger : MonoBehaviour
 	{
 		if (other.tag == "Player") 
 		{
-			FPController.forcedLook = false;
+			/* (FOR FOCUSING IN ON THE OCD TASK)
+			// FPController.forcedLook = false;
+			*/
 		}
 	}
 }
