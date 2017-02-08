@@ -23,6 +23,20 @@ public class CameraTrigger : MonoBehaviour
 		FPController = player.GetComponent<RigidbodyFirstPersonController> (); // Gives access to the RigidbodyFirstPersonController script
 	}
 
+	void OnTriggerEnter(Collider other) // While player is still in the trigger
+	{
+		if (other.tag == "Player") 
+		{
+			ActivateCamera2(); /*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)*/
+			Invoke("ActivateMainCamera", 0.5f); // Calls ActivateMainCamera afer 0.5 seconds. /*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)*/
+
+			/* (FOR FOCUSING IN ON THE OCD TASK)
+			//FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
+			//mainCamera.transform.LookAt(targetToLookAt); // Focus on the OCD task
+			*/
+		}
+	}
+
 	void OnTriggerStay(Collider other) // While player is still in the trigger
 	{
 		if (other.tag == "Player") 
@@ -42,5 +56,19 @@ public class CameraTrigger : MonoBehaviour
 			// FPController.forcedLook = false;
 			*/
 		}
+	}
+
+	/*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)*/
+	private void ActivateCamera2()
+	{
+		mainCamera.SetActive(false);
+		camera2.SetActive(true);
+	}
+
+	/*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)*/
+	private void ActivateMainCamera()
+	{
+		camera2.SetActive(false);
+		mainCamera.SetActive(true);
 	}
 }
