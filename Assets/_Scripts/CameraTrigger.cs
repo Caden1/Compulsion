@@ -19,6 +19,7 @@ public class CameraTrigger : MonoBehaviour
 	{
 		mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag
 		camera2 = GameObject.FindWithTag("Camera2"); // Sets the 2nd camera to variable camera2 by finding its tag
+        camera2.SetActive(false);
 		player = GameObject.FindWithTag("Player"); // Finds the player
 		FPController = player.GetComponent<RigidbodyFirstPersonController> (); // Gives access to the RigidbodyFirstPersonController script
 	}
