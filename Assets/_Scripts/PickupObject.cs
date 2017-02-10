@@ -5,7 +5,6 @@ public class PickupObject : MonoBehaviour {
 
     private GameObject mainCamera;
     private bool carrying;
-    //private GameObject carriedObject;
 
     public float floatDistance = 3f;
     public float floatSpeed = 3f;
@@ -24,7 +23,6 @@ public class PickupObject : MonoBehaviour {
     void Start ()
     {
         mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag 
-
 	}
 
 
@@ -39,13 +37,6 @@ public class PickupObject : MonoBehaviour {
                 objectHeld.GetComponent<Rigidbody>().useGravity = false;
             }
         }
-        //else if (Input.GetMouseButton(0))
-        //{
-        //    if(objectHeld != null)
-        //    {
-        //        Carry(objectHeld);
-        //    }
-        //}
         else if (Input.GetMouseButtonUp(0))
         {
             if(objectHeld != null)
@@ -63,22 +54,35 @@ public class PickupObject : MonoBehaviour {
         }
     }
 
+    //private void FixedUpdate()
+    //{
+    //    if (objectHeld != null)
+    //    {
+    //        Carry(objectHeld);
+    //    }
+    //}
 
-    void FixedUpdate()
+    private void LateUpdate()
     {
         if (objectHeld != null)
         {
-            Carry(objectHeld);
+            Carry();
         }
     }
 
-    private void Carry(GameObject obj)
-    {
+    private void Carry()
+    {       
+        //TODO: CREATE LERP TOL
+        //TODO: CREATE COLLISION DETECTION
         // Object floats in front of player at "floatDistance"
-        obj.transform.position = Vector3.Lerp(obj.transform.position, mainCamera.transform.position + mainCamera.transform.forward * floatDistance, floatSpeed);
+        objectHeld.transform.position = 
+            Vector3.Lerp(objectHeld.transform.position, 
+            mainCamera.transform.position + (mainCamera.transform.forward * floatDistance), 
+            floatSpeed * Time.deltaTime);
 
         // Prevents object from rotating while held
-        obj.transform.rotation = Quaternion.identity; // !! CHANGE FOR ROTATING WITH BODY !!
+        objectHeld.transform.rotation = Quaternion.identity; // !! CHANGE FOR ROTATING WITH BODY !!
+
     }
 
     //private void Pickup()
