@@ -104,5 +104,11 @@ namespace UnityStandardAssets.ImageEffects
 
             RenderTexture.ReleaseTemporary(buffer);
         }
+
+        //Create a way to disable and enable the blur effect from another class - Added by Domas
+        void Enable(bool isEnabled)
+        {
+            enabled = isEnabled;
+        }
     }
 }
