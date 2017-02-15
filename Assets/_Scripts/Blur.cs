@@ -8,6 +8,12 @@ public class Blur : MonoBehaviour
 {
     //used for stopping blur pulse - Added by Domas
     [HideInInspector] public bool pulse;
+	[HideInInspector] public bool progBlur; // temp var for first Playtest
+	public int secondsUntilBlurIncrease = 2; // temp var for first Playtest
+	public float startSpread; // temp var for first playtest
+	public int startIterations; // temp var for first playtest
+	public int secondsUntilBlurStartsAgain;
+
 
     /// Blur iterations - larger number means more blur.
     [Range(0, 10)]
@@ -141,4 +147,48 @@ public class Blur : MonoBehaviour
             yield return new WaitForSeconds(.05f);
         }
     }
+	// temp functions for the first play test
+	// this funciton will constantly increase the blur effect until progBlur is set to false.
+	public IEnumerator ProgressiveBlur()
+	{
+		enabled = true;
+
+		while (progBlur)
+		{
+			blurSpread += 0.1f;
+			if(blurSpread >= 1f)
+			{
+				iterations++;
+				blurSpread = 0.5f;
+			}
+			yield return new WaitForSeconds (secondsUntilBlurIncrease);
+		}
+	}
+
+	// this function will stop the blur effect
+	public void StopAndResetBlur()
+	{
+		enabled = false;
+		progBlur = false;
+		blurSpread = startSpread;
+		iterations = startIterations;
+		StartBlurTimer ();
+
+		//yield return new WaitForSeconds (secondsUntilBlurStartsAgain);
+
+		//progBlur = true;
+		Invoke ("SetProgBlur", secondsUntilBlurStartsAgain);
+	}
+
+	private IEnumerator StartBlurTimer()
+	{
+		yield return new WaitForSeconds (secondsUntilBlurStartsAgain);
+
+		progBlur = true;
+		StartCoroutine(ProgressiveBlur());
+	}
+	private void SetProgBlur()
+	{
+		StartCoroutine(ProgressiveBlur());
+	}
 }
