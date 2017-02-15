@@ -16,7 +16,6 @@ public class CameraTrigger : MonoBehaviour
 
 	public float turnSpeed = 3.0f;
 	public Transform targetToLookAt; // For using the method of rotating to the ghostObject rotation
-	private Transform ghostObject; // For ratating to the ghostObject rotation
 
 	// Use this for initialization
 	void Start () 
@@ -26,7 +25,6 @@ public class CameraTrigger : MonoBehaviour
         camera2.SetActive(false);
 		player = GameObject.FindWithTag("Player"); // Finds the player
 		FPController = player.GetComponent<RigidbodyFirstPersonController> (); // Gives access to the RigidbodyFirstPersonController script
-		ghostObject = GameObject.FindWithTag("GhostObject").transform;
 	}
 
 	void OnTriggerEnter(Collider other) // While player is still in the trigger

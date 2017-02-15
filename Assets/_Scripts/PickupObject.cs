@@ -31,24 +31,33 @@ public class PickupObject : MonoBehaviour {
         if (Input.GetMouseButtonDown(0))
         {
             ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+            Debug.DrawRay(ray.origin, ray.direction, Color.red, 10);
             if(Physics.Raycast(ray, out hit, touchRange, pickUpMask))
             {
                 objectHeld = hit.collider.gameObject;
                 objectHeld.GetComponent<Rigidbody>().useGravity = false;
+                Carry();
+            }
+            else if(Physics.Raycast(ray, out hit, touchRange, activatableMask))
+            {
+                objectHeld = hit.collider.gameObject;
             }
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            if(objectHeld != null)
+            if (objectHeld != null)
             {
-                DropObject();
-            }
-            else
-            {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
+                if (((1 << objectHeld.layer) & pickUpMask) != 0)
                 {
-                    hit.transform.gameObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
+                    DropObject();
+                }
+                else if(((1 << objectHeld.layer) & activatableMask) != 0)
+                {
+                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                    if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
+                    {
+                        hit.transform.gameObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
+                    }
                 }
             }
         }
@@ -61,14 +70,6 @@ public class PickupObject : MonoBehaviour {
     //        Carry(objectHeld);
     //    }
     //}
-
-    private void LateUpdate()
-    {
-        if (objectHeld != null)
-        {
-            Carry();
-        }
-    }
 
     private void Carry()
     {       

@@ -5,39 +5,21 @@ using UnityEngine;
 public class LightSwitch : MonoBehaviour {
 
     public Light[] lights;
-    public bool startOn;
+    public bool isOn;
+    public Transform lever;
 
-    private Transform lever;
-    private Quaternion on;
-    private Quaternion off;
-
-    private void Start()
+    public void Activate()
     {
-        lever = GetComponentInChildren<Transform>();
-        if (startOn)
-        {
-            on = lever.rotation;
-
-            if (Vector3.forward == lever.forward)
-                off = Quaternion.Euler(lever.rotation.eulerAngles +  Vector3.right * 90f);
-            else
-                off = Quaternion.Euler(lever.rotation.eulerAngles + Vector3.forward * 90f);
-        }
+        if (isOn)
+            lever.Rotate(Vector3.up * -20f);
         else
-        {
-            off = lever.rotation;
+            lever.Rotate(Vector3.up * 20f);
+        
 
-            if (Vector3.forward != lever.forward)
-                on = Quaternion.Euler(lever.rotation.eulerAngles + Vector3.right * -90f);
-            else
-                on = Quaternion.Euler(lever.rotation.eulerAngles + Vector3.forward * -90f);
+        isOn = !isOn;
+        foreach (Light light in lights)
+        {
+            light.enabled = !light.enabled;
         }
     }
-
-
-
-
-    // Use this for initialization
-
-
 }
