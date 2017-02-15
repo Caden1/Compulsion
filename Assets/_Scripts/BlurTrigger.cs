@@ -9,14 +9,13 @@ public class BlurTrigger : MonoBehaviour {
     void Start()
     {
         mainCamera = GameObject.FindWithTag("MainCamera");
+		StartCoroutine(mainCamera.GetComponent<Blur>().StartBlurTimer());
     }
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Player")
         {
-            mainCamera.GetComponent<Blur>().enabled = true;
-            mainCamera.GetComponent<Blur>().pulse = true;
-            StartCoroutine(mainCamera.GetComponent<Blur>().BlurPulse());
+			//StartCoroutine(mainCamera.GetComponent<Blur>().ProgressiveBlur());
         }
     }
 }
