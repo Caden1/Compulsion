@@ -8,13 +8,17 @@ public class LightSwitch : MonoBehaviour {
     public bool isOn;
     public Transform lever;
 
+    public Blur blur;
+
     public void Activate()
     {
         if (isOn)
             lever.Rotate(Vector3.up * -20f);
         else
             lever.Rotate(Vector3.up * 20f);
-        
+
+
+        blur.StopAndResetBlur();
 
         isOn = !isOn;
         foreach (Light light in lights)
