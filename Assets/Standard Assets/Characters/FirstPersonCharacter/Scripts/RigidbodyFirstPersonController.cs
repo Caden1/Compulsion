@@ -135,10 +135,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void Update()
         {
-			if (forcedLook == false) // ADDED BY CADEN. Only rotate camera if not trying to force look
-			{
-				RotateView();
-			}
+			RotateView();
 
             if (CrossPlatformInputManager.GetButtonDown("Jump") && !m_Jump)
             {
@@ -240,13 +237,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             // get the rotation before it's changed
             float oldYRotation = transform.eulerAngles.y;
 
-            mouseLook.LookRotation (transform, cam.transform);
+            if (forcedLook == false) // ADDED BY CADEN. Only rotate camera if not trying to force look
+            {
+                mouseLook.LookRotation(transform, cam.transform);
+            }
 
             if (m_IsGrounded || advancedSettings.airControl)
             {
                 // Rotate the rigidbody velocity to match the new direction that the character is looking
                 Quaternion velRotation = Quaternion.AngleAxis(transform.eulerAngles.y - oldYRotation, Vector3.up);
-                m_RigidBody.velocity = velRotation*m_RigidBody.velocity;
+                m_RigidBody.velocity = velRotation * m_RigidBody.velocity;
             }
         }
 

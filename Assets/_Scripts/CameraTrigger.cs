@@ -17,6 +17,8 @@ public class CameraTrigger : MonoBehaviour
 	public float turnSpeed = 3.0f;
 	public Transform targetToLookAt; // For using the method of rotating to the ghostObject rotation
 
+    private Quaternion rotOnColEnter;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -27,54 +29,57 @@ public class CameraTrigger : MonoBehaviour
 		FPController = player.GetComponent<RigidbodyFirstPersonController> (); // Gives access to the RigidbodyFirstPersonController script
 	}
 
-	void OnTriggerEnter(Collider other) // While player is still in the trigger
-	{
-		if (other.tag == "Player") 
-		{
-			FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
-			//ghostObject.LookAt(targetToLookAt);
-
-
-			/*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)
-			//ActivateCamera2(); 
-			//Invoke("ActivateMainCamera", 0.5f); // Calls ActivateMainCamera afer 0.5 seconds.
-			//*/
-
-			/* (FOR FOCUSING IN ON THE OCD TASK)
-			//FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
-			//mainCamera.transform.LookAt(targetToLookAt); // Focus on the OCD task
-			*/
-		}
-	}
-
 	void Update()
 	{
 		if (FPController.forcedLook == true)
 		{
 			mainCamera.transform.rotation = Quaternion.Slerp (mainCamera.transform.rotation, new Quaternion(-0.004f, 0.7f, -0.004f, -0.7f), Time.deltaTime * turnSpeed);
-			Debug.Log("x = " + mainCamera.transform.rotation[0]);
-			Debug.Log("y = " + mainCamera.transform.rotation[1]);
-			Debug.Log("z = " + mainCamera.transform.rotation[2]);
-			Debug.Log("w = " + mainCamera.transform.rotation[3]);
+            // Debugs are for determining the rotation the player needs to be to look at the object.
+			//Debug.Log("x = " + mainCamera.transform.rotation[0]);
+			//Debug.Log("y = " + mainCamera.transform.rotation[1]);
+			//Debug.Log("z = " + mainCamera.transform.rotation[2]);
+			//Debug.Log("w = " + mainCamera.transform.rotation[3]);
 		}
 	}
 
-	void OnTriggerStay(Collider other) // While player is still in the trigger
-	{
-		if (other.tag == "Player") 
-		{
-			/* (FOR FOCUSING IN ON THE OCD TASK)
+    void OnTriggerEnter(Collider other) // While player is still in the trigger
+    {
+        if (other.tag == "Player")
+        {
+            FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
+                                            //ghostObject.LookAt(targetToLookAt);
+            
+
+
+
+            /*(FOR ACTIVATING A 2ND CAMERA TO SEE OCD TASK)
+			//ActivateCamera2(); 
+			//Invoke("ActivateMainCamera", 0.5f); // Calls ActivateMainCamera afer 0.5 seconds.
+			//*/
+
+            /* (FOR FOCUSING IN ON THE OCD TASK)
 			//FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
 			//mainCamera.transform.LookAt(targetToLookAt); // Focus on the OCD task
 			*/
-		}
-	}
+        }
+    }
 
-	void OnTriggerExit(Collider other) // When player leaves the trigger
+    void OnTriggerStay(Collider other) // While player is still in the trigger
 	{
 		if (other.tag == "Player") 
 		{
-			 FPController.forcedLook = false;
+            /* (FOR FOCUSING IN ON THE OCD TASK)
+			//FPController.forcedLook = true; // Boolean I created in the RigidbodyFirstPersonController script
+			//mainCamera.transform.LookAt(targetToLookAt); // Focus on the OCD task
+			*/
+        }
+    }
+
+    void OnTriggerExit(Collider other) // When player leaves the trigger
+	{
+		if (other.tag == "Player") 
+		{
+            FPController.forcedLook = false;
 
 			/* (FOR FOCUSING IN ON THE OCD TASK)
 			// FPController.forcedLook = false;
