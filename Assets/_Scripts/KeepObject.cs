@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class KeepObject : MonoBehaviour
 {
+    private static bool oneAtATime;
     private static bool twoPlates;
     private static bool forkAndKnife;
 
 	// Use this for initialization
 	void Start ()
     {
+        oneAtATime = false;
         twoPlates = false;
         forkAndKnife = false;
     }
@@ -34,6 +36,7 @@ public class KeepObject : MonoBehaviour
             //Debug.Log("Pickup Should be false: " + twoPlates);
             twoPlates = true;
             //Debug.Log("Pickup Should be true: " + twoPlates);
+            oneAtATime = true;
         }
         else if (gameObject.name == "SetDownOnTable" && twoPlates == true)
         {
@@ -42,6 +45,7 @@ public class KeepObject : MonoBehaviour
             //Debug.Log("SetDown Should be true: " + twoPlates);
             twoPlates = false;
             //Debug.Log("SetDown Should be false: " + twoPlates);
+            oneAtATime = false;
         }
 
         // FOR FORK AND KNIFE:
@@ -52,6 +56,7 @@ public class KeepObject : MonoBehaviour
             gameObject.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = false;
             gameObject.transform.GetChild(3).GetComponent<MeshRenderer>().enabled = false;
             forkAndKnife = true;
+            oneAtATime = true;
         }
         else if (gameObject.name == "SetDownOnTable" && forkAndKnife == true)
         {
@@ -61,6 +66,7 @@ public class KeepObject : MonoBehaviour
             gameObject.transform.GetChild(4).GetComponent<MeshRenderer>().enabled = true;
             gameObject.transform.GetChild(5).GetComponent<MeshRenderer>().enabled = true;
             forkAndKnife = false;
+            oneAtATime = false;
         }
     }
 }
