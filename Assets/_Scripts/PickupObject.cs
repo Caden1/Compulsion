@@ -5,7 +5,6 @@ public class PickupObject : MonoBehaviour {
 
     private GameObject mainCamera;
     private bool carrying;
-    private bool grabbedObject; // Caden Added
 
     public float floatDistance = 3f;
     public float floatSpeed = 3f;
@@ -25,7 +24,6 @@ public class PickupObject : MonoBehaviour {
     void Start ()
     {
         mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag 
-        grabbedObject = false; // Caden Added
     }
 
 
@@ -45,21 +43,11 @@ public class PickupObject : MonoBehaviour {
             {
                 objectHeld = hit.collider.gameObject;
             }
-            /*
             else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
             {
-                if (grabbedObject == false) // Caden Added
-                {
-                    hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
-                    grabbedObject = true; // Caden Added
-                }
-                else if (grabbedObject == true) // Caden Added
-                {
-                    hit.transform.gameObject.SendMessage("SetDown", SendMessageOptions.DontRequireReceiver); // Caden Added
-                    grabbedObject = false; // Caden Added
-                }
+                //objectHeld = hit.collider.gameObject;
+                hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
             }
-            */
         }
         else if (Input.GetMouseButtonUp(0))
         {
