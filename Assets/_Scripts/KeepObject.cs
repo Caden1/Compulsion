@@ -7,20 +7,73 @@ public class KeepObject : MonoBehaviour
     private static bool oneAtATime;
     private static bool twoPlates;
     private static bool forkAndKnife;
+    private static bool sponge;
 
-	// Use this for initialization
-	void Start ()
+    private bool scrubTable;
+    private bool scrubLeftDir;
+
+    public Transform spongePosition; 
+
+    // Use this for initialization
+    void Start ()
     {
-        oneAtATime = false;
+        oneAtATime = false; // not being used yet
         twoPlates = false;
         forkAndKnife = false;
+        sponge = false;
+
+        scrubTable = false;
+        scrubLeftDir = true;
+
+        //spongePosition = GameObject.FindGameObjectWithTag("SpongeForScrubbing").transform;
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
+		if (scrubTable == true)
+        {
+            //Invoke("ReverseScrubDirection", 0.25f);
+
+            if (scrubLeftDir == true)
+            {
+                spongePosition.position = Vector3.Lerp(spongePosition.position,
+                    new Vector3(spongePosition.position.x + 0.8f, spongePosition.position.y, spongePosition.position.z - 1.5f), Time.deltaTime * 2.0f);
+
+                Invoke("ReverseScrubDirection", 0.25f);
+            }
+            else
+            {
+                spongePosition.position = Vector3.Lerp(spongePosition.position,
+                    new Vector3(spongePosition.position.x - 0.8f, spongePosition.position.y, spongePosition.position.z + 1.5f), Time.deltaTime * 2.0f);
+
+                //Invoke("ReverseScrubDirection", 0.15f);
+            }
+
+            
+
+            Invoke("StopScrubbing", 2.0f);
+            //gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
+        }
 	}
+
+    private void ReverseScrubDirection()
+    {
+        scrubLeftDir = false;
+
+        Invoke("ReverseScrubDirection2", 0.25f);
+    }
+
+    private void ReverseScrubDirection2()
+    {
+        scrubLeftDir = true;
+    }
+
+    private void StopScrubbing()
+    {
+        scrubTable = false;
+        spongePosition.GetComponent<MeshRenderer>().enabled = false;
+    }
 
     public void Grab()
     {
@@ -67,6 +120,19 @@ public class KeepObject : MonoBehaviour
             gameObject.transform.GetChild(5).GetComponent<MeshRenderer>().enabled = true;
             forkAndKnife = false;
             oneAtATime = false;
+        }
+
+        // FOR SPONGE:
+        else if(gameObject.name == "Sponge" && sponge == false)
+        {
+            gameObject.transform.GetComponent<MeshRenderer>().enabled = false;
+            sponge = true;
+        }
+        else if (gameObject.name == "SetDownOnTable" && sponge == true)
+        {
+            gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
+            sponge = false;
+            scrubTable = true;
         }
     }
 }
