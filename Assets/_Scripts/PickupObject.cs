@@ -14,7 +14,8 @@ public class PickupObject : MonoBehaviour {
     public LayerMask pickUpMask;
     public LayerMask activatableMask;
     public LayerMask keepMask; // Caden Added.
-    
+    public LayerMask OCDTaskMask; // Caden Added.
+
 
     private Ray ray;
     private RaycastHit hit;
@@ -47,6 +48,10 @@ public class PickupObject : MonoBehaviour {
             {
                 //objectHeld = hit.collider.gameObject;
                 hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
+            }
+            if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
+            {
+                hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
             }
         }
         else if (Input.GetMouseButtonUp(0))
