@@ -11,67 +11,79 @@ public class PickupObject : MonoBehaviour {
     public float touchRange = 3f;
 
 
-    public LayerMask pickUpMask;
+    public LayerMask interactable;
+    //public LayerMask pickUpMask;
     public LayerMask activatableMask;
     public LayerMask keepMask; // Caden Added.
     public LayerMask OCDTaskMask; // Caden Added.
+    public GameObject reticle;
 
 
     private Ray ray;
     private RaycastHit hit;
     private GameObject objectHeld;
+    private Vector2 screencenter;
 
     // Use this for initialization
     void Start ()
     {
         mainCamera = GameObject.FindWithTag("MainCamera"); // Sets the main camera to variable mainCamera by finding its tag 
+        screencenter = new Vector2(Screen.width/2, Screen.height/2);
     }
 
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(screencenter);
+        if(Physics.Raycast(ray, out hit, touchRange, interactable))
         {
-            ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
-            Debug.DrawRay(ray.origin, ray.direction, Color.red, 10);
-            if(Physics.Raycast(ray, out hit, touchRange, pickUpMask))
+            reticle.SetActive(true);
+            if (Input.GetMouseButtonDown(0))
             {
-                objectHeld = hit.collider.gameObject;
-                objectHeld.GetComponent<Rigidbody>().useGravity = false;
-                Carry();
-            }
-            else if(Physics.Raycast(ray, out hit, touchRange, activatableMask))
-            {
-                objectHeld = hit.collider.gameObject;
-            }
-            else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
-            {
-                //objectHeld = hit.collider.gameObject;
-                hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
-            }
-            if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
-            {
-                hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
-            }
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            if (objectHeld != null)
-            {
-                if (((1 << objectHeld.layer) & pickUpMask) != 0)
+                //ray = mainCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+                //if (Physics.Raycast(ray, out hit, touchRange, pickUpMask))
+                //{
+                //    objectHeld = hit.collider.gameObject;
+                //    objectHeld.GetComponent<Rigidbody>().useGravity = false;
+                //    Carry();
+                //}
+                if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
                 {
-                    DropObject();
+                    objectHeld = hit.collider.gameObject;
                 }
-                else if(((1 << objectHeld.layer) & activatableMask) != 0)
+                else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
                 {
-                    ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                    if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
+                    //objectHeld = hit.collider.gameObject;
+                    hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
+                }
+                else if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
+                {
+                    hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                if (objectHeld != null)
+                {
+                    //if (((1 << objectHeld.layer) & pickUpMask) != 0)
+                    //{
+                    //    DropObject();
+                    //}
+                    if (((1 << objectHeld.layer) & activatableMask) != 0)
                     {
-                        hit.transform.gameObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
+                        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                        if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
+                        {
+                            hit.transform.gameObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
+                        }
                     }
                 }
             }
         }
+        else
+        {
+            reticle.SetActive(false);
+        }    
     }
 
     //private void FixedUpdate()
