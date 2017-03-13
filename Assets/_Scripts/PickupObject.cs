@@ -14,8 +14,8 @@ public class PickupObject : MonoBehaviour {
     public LayerMask interactable;
     //public LayerMask pickUpMask;
     public LayerMask activatableMask;
-    public LayerMask keepMask; // Caden Added.
-    public LayerMask OCDTaskMask; // Caden Added.
+    //public LayerMask keepMask; // Caden Added.
+    //public LayerMask OCDTaskMask; // Caden Added.
     public GameObject reticle;
 
 
@@ -47,19 +47,37 @@ public class PickupObject : MonoBehaviour {
                 //    objectHeld.GetComponent<Rigidbody>().useGravity = false;
                 //    Carry();
                 //}
+                switch (hit.transform.tag) // Caden Added
+                {
+                    // For picking things up and setting them down (general)
+                    case "KeepThenSet":
+                        // Calls the Grab function in the script attached to this gameObject
+                        hit.transform.gameObject.SendMessage("GrabThenSetDown", SendMessageOptions.DontRequireReceiver);
+                        // Calls the Scrub function in the script attached to this gameObject
+                        hit.transform.gameObject.SendMessage("Scrub", SendMessageOptions.DontRequireReceiver);
+                        break;
+                }
+                /*
+                if (hit.transform.tag == "Keep")
+                {
+                    // Calls the Grab function in the script attached to this gameObject????
+                    hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
+                }
+                */
+                
                 if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
                 {
                     objectHeld = hit.collider.gameObject;
                 }
-                else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
-                {
+                //else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
+                //{
                     //objectHeld = hit.collider.gameObject;
-                    hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
-                }
-                else if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
-                {
-                    hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
-                }
+                    //hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
+                //}
+                //else if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
+                //{
+                    //hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
+                //}
             }
             else if (Input.GetMouseButtonUp(0))
             {

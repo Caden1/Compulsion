@@ -5,8 +5,8 @@ using UnityEngine;
 public class KeepObject : MonoBehaviour
 {
     private static bool oneAtATime;
-    private static bool twoPlates;
-    private static bool forkAndKnife;
+    //private static bool twoPlates;
+    //private static bool forkAndKnife;
     private static bool sponge;
 
     private bool scrubTable;
@@ -18,8 +18,8 @@ public class KeepObject : MonoBehaviour
     void Start ()
     {
         oneAtATime = false; // not being used yet
-        twoPlates = false;
-        forkAndKnife = false;
+        //twoPlates = false;
+        //forkAndKnife = false;
         sponge = false;
 
         scrubTable = false;
@@ -82,6 +82,7 @@ public class KeepObject : MonoBehaviour
         //gameObject.GetComponent<MeshRenderer>().enabled = false;
 
         // FOR 2 PLATES:
+        /*
         if (gameObject.name == "2PlatesPickup" && twoPlates == false)
         {
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
@@ -100,9 +101,10 @@ public class KeepObject : MonoBehaviour
             //Debug.Log("SetDown Should be false: " + twoPlates);
             oneAtATime = false;
         }
+        */
 
         // FOR FORK AND KNIFE:
-        else if (gameObject.name == "ForkKnifePickup" && forkAndKnife == false)
+        /*else*/ /* if (gameObject.name == "ForkKnifePickup" && forkAndKnife == false)
         {
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = false;
             gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
@@ -121,9 +123,10 @@ public class KeepObject : MonoBehaviour
             forkAndKnife = false;
             oneAtATime = false;
         }
+        */
 
         // FOR SPONGE:
-        else if(gameObject.name == "Sponge" && sponge == false)
+        /*else*/ if(gameObject.name == "Sponge" && sponge == false)
         {
             gameObject.transform.GetComponent<MeshRenderer>().enabled = false;
             sponge = true;
