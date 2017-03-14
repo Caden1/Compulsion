@@ -10,6 +10,7 @@ public class OvenDoor : MonoBehaviour {
     private Quaternion closed;
     private Quaternion open;
     private Quaternion target;
+    private Coroutine cor;
 
     // Use this for initialization
     private void Start()
@@ -20,24 +21,27 @@ public class OvenDoor : MonoBehaviour {
         target = closed;
     }
 
-    private void Update()
-    {
-        //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * speed);
-        transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
-    }
-
     public void Activate()
     {
+        if (cor != null)
+            StopCoroutine(cor);
 
         if (isOpen)
-        {
             target = closed;
-        }
         else
-        {
             target = open;
-        }
 
+        cor = StartCoroutine("Swing");
         isOpen = !isOpen;
+    }
+
+    private IEnumerator Swing()
+    {
+        Debug.Log(Quaternion.Angle(transform.rotation, target));
+        while (Quaternion.Angle(transform.rotation, target) != 0)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
+            yield return null;
+        }
     }
 }
