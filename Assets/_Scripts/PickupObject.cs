@@ -14,8 +14,6 @@ public class PickupObject : MonoBehaviour {
     public LayerMask interactable;
     //public LayerMask pickUpMask;
     public LayerMask activatableMask;
-    public LayerMask keepMask; // Caden Added.
-    public LayerMask OCDTaskMask; // Caden Added.
     public GameObject reticle;
 
 
@@ -47,18 +45,24 @@ public class PickupObject : MonoBehaviour {
                 //    objectHeld.GetComponent<Rigidbody>().useGravity = false;
                 //    Carry();
                 //}
+
+                // Switch for tags
+                switch (hit.transform.tag) // Caden Added
+                {
+                    case "KeepThenSet": // For picking things up and setting them down
+                        // Calls the Grab function in the script attached to this gameObject
+                        hit.transform.gameObject.SendMessage("GrabThenSetDown", SendMessageOptions.DontRequireReceiver);
+                        // Calls the Scrub function in the script attached to this gameObject
+                        hit.transform.gameObject.SendMessage("Scrub", SendMessageOptions.DontRequireReceiver);
+                        break;
+                    case "Activate": // For activating things. E.g. open drawers.
+                        hit.transform.gameObject.SendMessage("Activate", SendMessageOptions.DontRequireReceiver);
+                        break;
+                }
+                
                 if (Physics.Raycast(ray, out hit, touchRange, activatableMask))
                 {
                     objectHeld = hit.collider.gameObject;
-                }
-                else if (Physics.Raycast(ray, out hit, touchRange, keepMask)) // Caden Added
-                {
-                    //objectHeld = hit.collider.gameObject;
-                    hit.transform.gameObject.SendMessage("Grab", SendMessageOptions.DontRequireReceiver); // Caden Added
-                }
-                else if (Physics.Raycast(ray, out hit, touchRange, OCDTaskMask)) // Caden Added
-                {
-                    hit.transform.gameObject.SendMessage("OCDTask", SendMessageOptions.DontRequireReceiver); // Caden Added
                 }
             }
             else if (Input.GetMouseButtonUp(0))
