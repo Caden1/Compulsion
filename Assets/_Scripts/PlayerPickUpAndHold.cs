@@ -7,6 +7,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
     private static int itemsCarried;
     private Transform playerCarryPosition;
     private Transform playerPosition;
+	public PopUpText tempObj;
 
     // Use this for initialization
     void Start()
@@ -32,6 +33,12 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
     public void SetDown()
     {
+		if (GameObject.FindGameObjectWithTag ("KeepThenSet")) {
+			GameObject g = GameObject.FindGameObjectWithTag ("Task1");
+			tempObj = g.GetComponent<PopUpText> ();
+			tempObj.DisableTableText = true;
+			//Debug.Log ("Plates have been put down");
+		}
         itemsCarried--;
     }
 }
