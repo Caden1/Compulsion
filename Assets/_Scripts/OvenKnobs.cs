@@ -22,8 +22,6 @@ public class OvenKnobs : MonoBehaviour
         turning = false;
         origPos = knob.localPosition;
         origRot = knob.localRotation;
-
-        
     }
 
     // Update is called once per frame
@@ -58,7 +56,7 @@ public class OvenKnobs : MonoBehaviour
         turning = false;
     }
 
-    public void OCDTask()
+    public void Activate()
     {
         turning = true;
 

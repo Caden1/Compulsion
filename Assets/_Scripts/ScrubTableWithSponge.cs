@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class ScrubTableWithSponge : MonoBehaviour
 {
+    public Blur blur;
+
     private static bool sponge;
 
     private Transform spongePosition;
     private bool scrubTable;
     private bool scrubLeftDir;
+    private GameObject spongeReference;
 
     // Use this for initialization
     void Start ()
@@ -17,6 +20,8 @@ public class ScrubTableWithSponge : MonoBehaviour
         sponge = false;
         scrubTable = false;
         scrubLeftDir = true;
+
+        spongeReference = GameObject.Find("Sponge"); // Need a reference to the sponge.
     }
 
     // Update is called once per frame
@@ -24,8 +29,6 @@ public class ScrubTableWithSponge : MonoBehaviour
     {
         if (scrubTable == true)
         {
-            //Invoke("ReverseScrubDirection", 0.25f);
-
             if (scrubLeftDir == true)
             {
                 spongePosition.position = Vector3.Lerp(spongePosition.position,
@@ -37,14 +40,9 @@ public class ScrubTableWithSponge : MonoBehaviour
             {
                 spongePosition.position = Vector3.Lerp(spongePosition.position,
                     new Vector3(spongePosition.position.x - 0.8f, spongePosition.position.y, spongePosition.position.z + 1.5f), Time.deltaTime * 2.0f);
-
-                //Invoke("ReverseScrubDirection", 0.15f);
             }
 
-
-
             Invoke("StopScrubbing", 2.0f);
-            //gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
@@ -64,20 +62,29 @@ public class ScrubTableWithSponge : MonoBehaviour
     {
         scrubTable = false;
         spongePosition.GetComponent<MeshRenderer>().enabled = false;
+
+        // CALL FUNCTION FROM BLUR TO STOP THE OCD EFFECT HERE
     }
 
     public void Scrub()
     {
         if (gameObject.name == "Sponge" && sponge == false)
         {
-            gameObject.transform.GetComponent<MeshRenderer>().enabled = false;
-            sponge = true;
+            SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
         }
         else if (gameObject.name == "KitchenTableCollider" && sponge == true)
         {
+            SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
+
+            Destroy(spongeReference);
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
         }
+    }
+
+    public void SetVarTrue()
+    {
+        sponge = true;
     }
 }
