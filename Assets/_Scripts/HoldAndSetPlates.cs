@@ -34,7 +34,6 @@ public class HoldAndSetPlates : MonoBehaviour
             twoPlates = false;
 			/*This is called when the plates are put on the counter after the sponge is used, and this
 			is a public boolean.*/
-			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().enabled = false;
 			setPlates = true;
         }
     }

@@ -20,8 +20,11 @@ public class MakeDinnerTask : MonoBehaviour {
 	void Update () {
 		if(HSF.FKSet == true && HSP.setPlates == true)
 		{
-		Debug.Log ("First task complete, moving on to second");
-		if (isTrue == false) {
+			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().enabled = false;
+
+			Debug.Log ("First task complete, moving on to second");
+		
+			if (isTrue == false) {
 			StartCoroutine (MakeDinnerText ());
 		}
 		
