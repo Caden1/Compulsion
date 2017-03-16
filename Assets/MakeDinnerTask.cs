@@ -3,33 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopUpText : MonoBehaviour {
-	bool isTrue = false;
-	public bool DisableTableText = false;
+public class MakeDinnerTask : MonoBehaviour {
 
+	public HoldAndSetPlates HSP;
+	public HoldAndSetForksKnives HSF;
+	bool isTrue  = false;
 	// Use this for initialization
 	void Start () {
-		GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
-		GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().enabled = false;
-        GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = false;
-
-		
+		GameObject g = GameObject.FindGameObjectWithTag ("KeepThenSet");
+		GameObject go = GameObject.FindGameObjectWithTag ("KeepThenSet");
+		HSP = g.GetComponent<HoldAndSetPlates> ();
+		HSF = go.GetComponent<HoldAndSetForksKnives> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//If any movement is triggered, we start a coroutine with a timer and then pop up the "Set Table" Text
-		if (Input.GetKey(KeyCode.W) || Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.S)
-			|| Input.GetKey (KeyCode.D)) {
-			if (isTrue == false) {
-				StartCoroutine (SetTableText ());
-			}
+		if(HSF.FKSet == true && HSP.setPlates == true)
+		{
+		Debug.Log ("First task complete, moving on to second");
+		if (isTrue == false) {
+			StartCoroutine (MakeDinnerText ());
 		}
-		if (DisableTableText == true) {
+		
+		/*if (DisableTableText == true) {
 			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
-		}
+		}*/
 	}
-	public IEnumerator SetTableText()
+	}
+
+	public IEnumerator MakeDinnerText()
 	{
 		isTrue = true;
 
@@ -37,9 +39,9 @@ public class PopUpText : MonoBehaviour {
 		yield return null;
 	}
 
-	
- public IEnumerator FadeTextToFullAlpha(float t, Text i)
- 	{
+
+	public IEnumerator FadeTextToFullAlpha(float t, Text i)
+	{
 		i.color = new Color(i.color.r, i.color.g, i.color.b, 0);
 		while (i.color.a < 1.0f)
 		{

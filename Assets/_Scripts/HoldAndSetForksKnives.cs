@@ -6,10 +6,13 @@ public class HoldAndSetForksKnives : MonoBehaviour
 {
     private static bool forkAndKnife;
     private GameObject forkAndKnifeReference;
+	public bool FKSet;
 
     // Use this for initialization
     void Start ()
     {
+		FKSet = false;
+
         forkAndKnife = false;
 
         forkAndKnifeReference = GameObject.Find("ForkKnifePickup"); // Need a reference to the original forks and knives.
@@ -33,6 +36,7 @@ public class HoldAndSetForksKnives : MonoBehaviour
             gameObject.transform.GetChild(4).GetComponent<MeshRenderer>().enabled = true;
             gameObject.transform.GetChild(5).GetComponent<MeshRenderer>().enabled = true;
             forkAndKnife = false;
+			FKSet = true;
         }
     }
 

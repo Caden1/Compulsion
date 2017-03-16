@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrubTableWithSponge : MonoBehaviour
 {
@@ -75,11 +76,14 @@ public class ScrubTableWithSponge : MonoBehaviour
         else if (gameObject.name == "KitchenTableCollider" && sponge == true)
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-
+			//Debug.Log ("Table has been scrubbed");
             Destroy(spongeReference);
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+			GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = true;
+			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }
     }
 
