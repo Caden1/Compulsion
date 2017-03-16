@@ -6,9 +6,12 @@ public class LightSwitch : MonoBehaviour {
 
     public Light[] lights;
     public bool isOn;
-    public Transform lever;
+    private Transform lever;
 
-    public Blur blur;
+    private void Start()
+    {
+        lever = transform.Find("pCylinder1");
+    }
 
     public void Activate()
     {
@@ -16,9 +19,6 @@ public class LightSwitch : MonoBehaviour {
             lever.Rotate(Vector3.up * -20f);
         else
             lever.Rotate(Vector3.up * 20f);
-
-
-        blur.StopAndResetBlur();
 
         isOn = !isOn;
         foreach (Light light in lights)
