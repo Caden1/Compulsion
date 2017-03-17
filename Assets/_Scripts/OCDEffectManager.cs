@@ -20,7 +20,6 @@ public class OCDEffectManager : MonoBehaviour {
         playerCamera = GameObject.FindWithTag("MainCamera");
         //Remember to add this tag
         playerAudio = GameObject.FindWithTag("PlayerAudio");
-        performOCDEffects = true;
 
     }
 	// Update is called once per frame
@@ -77,11 +76,11 @@ public class OCDEffectManager : MonoBehaviour {
         timeSinceLastOCDAttack = 0;
         timeSinceLastEffect = 0;
     }
-    private void StartOCDTimer()
+    public void StartOCDTimer()
     {
         performOCDEffects = true;
     }
-    private void StopOCDTimer()
+    public void StopOCDTimer()
     {
         performOCDEffects = false;
         ResetEffects();

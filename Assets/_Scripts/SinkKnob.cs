@@ -20,7 +20,7 @@ public class SinkKnob : MonoBehaviour {
         water = GameObject.Find("WaterParticleEffect").GetComponent<ParticleSystem>();
         water.Stop();
         closed = transform.rotation;
-        open = Quaternion.AngleAxis(-180f, Vector3.right) * transform.rotation;
+        open = Quaternion.AngleAxis(180f, Vector3.forward) * transform.rotation;
         target = closed;
     }
 

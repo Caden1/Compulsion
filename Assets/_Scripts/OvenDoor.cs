@@ -17,7 +17,7 @@ public class OvenDoor : MonoBehaviour {
     {
         isOpen = false;
         closed = transform.rotation;
-        open = Quaternion.AngleAxis(-90f, Vector3.right) * transform.rotation;
+        open = Quaternion.AngleAxis(90f, Vector3.forward) * transform.rotation;
         target = closed;
     }
 
