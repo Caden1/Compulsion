@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SinkKnob : MonoBehaviour {
 
     public float speed = 90f;
+	public HoldAndSetPlates HSP;
+	public HoldAndSetForksKnives HSF;
+	public MakeDinnerTask MDT;
 
     private bool isOpen;
     private Quaternion closed;
@@ -13,9 +17,12 @@ public class SinkKnob : MonoBehaviour {
     private Coroutine cor;
     private ParticleSystem water;
 
+
     // Use this for initialization
     private void Start()
     {
+		GameObject g = GameObject.FindGameObjectWithTag ("Task2");
+		MDT = g.GetComponent<MakeDinnerTask> ();
         isOpen = false;
         water = GameObject.Find("WaterParticleEffect").GetComponent<ParticleSystem>();
         water.Stop();
@@ -47,9 +54,17 @@ public class SinkKnob : MonoBehaviour {
             yield return null;
         }
 
-        if (isOpen)
-            water.Play();
-        else
-            water.Stop();
+		if (isOpen) {
+			water.Play ();
+		}
+		else {
+			water.Stop ();
+			if (MDT.OCDTasksActivated == true) {
+				Debug.Log ("Hands have been washed, delete this shitty text");
+				GameObject.FindGameObjectWithTag ("OCDKnobs").GetComponent<Text> ().enabled = false;
+				GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().text = "Check Knobs!";
+			}
+		}
+		
     }
 }

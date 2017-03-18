@@ -8,11 +8,11 @@ public class OCDEffectManager : MonoBehaviour {
 
     public GameObject playerCamera;
     public GameObject playerAudio;
+	public bool performOCDEffects = false;
     private float timeSinceLastOCDAttack = 0;
     private float timeUntilIncreasedEffects = 60;
     private bool activeAttack = false;
-    private bool performOCDEffects = false;
-    private float timeUntilEffect = 20;
+    private float timeUntilEffect = 7.5f;
     private float timeSinceLastEffect = 0;
 
     void Start ()
@@ -31,11 +31,13 @@ public class OCDEffectManager : MonoBehaviour {
             // will start an OCD attack every timeUntilIncreasedEffects seconds if one is not actively occurring.
             timeSinceLastOCDAttack += Time.deltaTime;
             timeSinceLastEffect += Time.deltaTime;
+			Debug.Log (timeSinceLastOCDAttack);
 
-            if (timeSinceLastOCDAttack >= timeUntilIncreasedEffects && !activeAttack)
+            if (timeSinceLastOCDAttack <= timeUntilIncreasedEffects && !activeAttack)
             {
                 if (timeSinceLastEffect >= timeUntilEffect)
                 {
+					Debug.Log ("OCD attack starting");
                     StartOCDAttack();
                     timeSinceLastEffect = 0;
                 }
