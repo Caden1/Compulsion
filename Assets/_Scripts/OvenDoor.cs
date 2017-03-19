@@ -12,6 +12,15 @@ public class OvenDoor : MonoBehaviour {
     private Quaternion target;
     private Coroutine cor;
 
+    // isOPen getter for Caden's CookCookies script.
+    public bool IsOpen
+    {
+        get
+        {
+            return isOpen;
+        }
+    }
+
     // Use this for initialization
     private void Start()
     {
