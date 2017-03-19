@@ -31,7 +31,7 @@ public class OCDEffectManager : MonoBehaviour {
             // will start an OCD attack every timeUntilIncreasedEffects seconds if one is not actively occurring.
             timeSinceLastOCDAttack += Time.deltaTime;
             timeSinceLastEffect += Time.deltaTime;
-			Debug.Log (timeSinceLastOCDAttack);
+			//Debug.Log (timeSinceLastOCDAttack);
 
             if (timeSinceLastOCDAttack <= timeUntilIncreasedEffects && !activeAttack)
             {

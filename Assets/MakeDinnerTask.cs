@@ -4,19 +4,23 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MakeDinnerTask : MonoBehaviour {
+    
 
 	public HoldAndSetPlates HSP;
 	public HoldAndSetForksKnives HSF;
-	public bool OCDTasksActivated = false;
+    public CookCookies CC; // Caden Added for cooking the cookies
+    public bool OCDTasksActivated = false;
 
 	private bool isTrue  = false;
 	// Use this for initialization
 	void Start () {
 		GameObject g = GameObject.FindGameObjectWithTag ("KeepThenSet");
 		GameObject go = GameObject.FindGameObjectWithTag ("KeepThenSet");
-		HSP = g.GetComponent<HoldAndSetPlates> ();
+        GameObject go3 = GameObject.FindGameObjectWithTag("KeepThenSet"); // Caden Added for cooking the cookies
+        HSP = g.GetComponent<HoldAndSetPlates> ();
 		HSF = go.GetComponent<HoldAndSetForksKnives> ();
-	}
+        CC = go3.GetComponent<CookCookies>(); // Caden Added for cooking the cookies
+    }
 	
 	// Update is called once per frame
 	void Update () {

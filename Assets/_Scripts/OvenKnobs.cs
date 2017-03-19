@@ -7,7 +7,7 @@ public class OvenKnobs : MonoBehaviour
 
     private static Dictionary<string, bool> knobSet = new Dictionary<string, bool>();
 
-    public float speed = 150f;
+    public float speed = 200f;
 
     private bool isOn;
     private int knobCount = 4;
@@ -23,7 +23,7 @@ public class OvenKnobs : MonoBehaviour
     {
         isOn = false;
         off = transform.rotation;
-        on = Quaternion.AngleAxis(135f, Vector3.right) * transform.rotation;
+        on = Quaternion.AngleAxis(-135f, transform.up) * transform.rotation;
         target = off;
         blur = GameObject.Find("OCDEffectManager").GetComponent<OCDEffectManager>();
     }
@@ -65,9 +65,10 @@ public class OvenKnobs : MonoBehaviour
 
     private IEnumerator Swing()
     {
-        Debug.Log(Quaternion.Angle(transform.rotation, target));
+        //Debug.Log(Quaternion.Angle(transform.rotation, target));
         while (Quaternion.Angle(transform.rotation, target) != 0)
         {
+            
             transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
         }
