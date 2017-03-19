@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScrubTableWithSponge : MonoBehaviour
 {
     public Blur blur;
+	public OCDEffectManager OEM;
 
     private static bool sponge;
-
     private Transform spongePosition;
     private bool scrubTable;
     private bool scrubLeftDir;
@@ -16,6 +17,8 @@ public class ScrubTableWithSponge : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+		GameObject g = GameObject.FindGameObjectWithTag ("OCDManager");
+		OEM = g.GetComponent<OCDEffectManager> ();
         spongePosition = GameObject.Find("KitchenTableCollider").transform.GetChild(6); // Gets the transform of the sponge on the table.
         sponge = false;
         scrubTable = false;
@@ -75,11 +78,16 @@ public class ScrubTableWithSponge : MonoBehaviour
         else if (gameObject.name == "KitchenTableCollider" && sponge == true)
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-
+			//Debug.Log ("Table has been scrubbed");
             Destroy(spongeReference);
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+			GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = true;
+			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
+			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
+			OEM.performOCDEffects = false;
+
         }
     }
 

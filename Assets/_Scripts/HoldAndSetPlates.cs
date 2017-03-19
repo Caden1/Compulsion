@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HoldAndSetPlates : MonoBehaviour
 {
     public static bool twoPlates;
     private GameObject plateReference;
+	public bool setPlates;
 
     // Use this for initialization
     void Start ()
     {
+		setPlates = false;
         twoPlates = false;
 
         plateReference = GameObject.Find("2PlatesPickup"); // Need a reference to the original plates.
@@ -29,11 +32,15 @@ public class HoldAndSetPlates : MonoBehaviour
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
             gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
             twoPlates = false;
+			/*This is called when the plates are put on the counter after the sponge is used, and this
+			is a public boolean.*/
+			setPlates = true;
         }
     }
 
     public void SetVarTrue()
     {
+		
         twoPlates = true;
     }
 }

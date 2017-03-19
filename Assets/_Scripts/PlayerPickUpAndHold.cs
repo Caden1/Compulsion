@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerPickUpAndHold : MonoBehaviour
 {
     private static int itemsCarried;
     private Transform playerCarryPosition;
     private Transform playerPosition;
+	public PopUpText tempObj;
+	int cnt = 0;
 
     // Use this for initialization
     void Start()
@@ -31,7 +34,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
     }
 
     public void SetDown()
-    {
+    {   
         itemsCarried--;
     }
 }
