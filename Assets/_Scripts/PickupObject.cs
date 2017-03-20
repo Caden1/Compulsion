@@ -8,7 +8,7 @@ public class PickupObject : MonoBehaviour {
 
     public float floatDistance = 3f;
     public float floatSpeed = 3f;
-    public float touchRange = 3f;
+    public float touchRange = 2f;
 
 
     public LayerMask interactable;

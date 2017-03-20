@@ -18,6 +18,15 @@ public class SinkKnob : MonoBehaviour {
     private ParticleSystem water;
 
 
+    // isOPen getter for Caden's CookCookies script.
+    public bool IsOpen
+    {
+        get
+        {
+            return isOpen;
+        }
+    }
+
     // Use this for initialization
     private void Start()
     {

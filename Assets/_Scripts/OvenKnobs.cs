@@ -58,6 +58,8 @@ public class OvenKnobs : MonoBehaviour
             if (complete)
             {
                 knobSet.Clear(); // Clear the knob set so it doesn't continue to execute this statement
+
+                // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
                 blur.StopOCDTimer();
             }
         }
