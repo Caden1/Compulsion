@@ -40,7 +40,6 @@ public class HoldAndSetPlates : MonoBehaviour
 
     public void SetVarTrue()
     {
-		
         twoPlates = true;
     }
 }
