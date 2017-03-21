@@ -9,7 +9,7 @@ public class BlurTrigger : MonoBehaviour {
     void Start()
     {
         mainCamera = GameObject.FindWithTag("MainCamera");
-		StartCoroutine(mainCamera.GetComponent<Blur>().StartBlurTimer());
+        StartCoroutine(mainCamera.GetComponent<Blur>().StartBlurTimer(1));
     }
     void OnTriggerEnter(Collider col)
     {

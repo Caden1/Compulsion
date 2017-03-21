@@ -12,12 +12,22 @@ public class OvenDoor : MonoBehaviour {
     private Quaternion target;
     private Coroutine cor;
 
+
+    // isOPen getter for Caden's CookCookies script.
+    public bool IsOpen
+    {
+        get
+        {
+            return isOpen;
+        }
+    }
+
     // Use this for initialization
     private void Start()
     {
         isOpen = false;
         closed = transform.rotation;
-        open = Quaternion.AngleAxis(-90f, Vector3.right) * transform.rotation;
+        open = Quaternion.AngleAxis(90f, Vector3.forward) * transform.rotation;
         target = closed;
     }
 

@@ -123,10 +123,13 @@ public class Blur : MonoBehaviour
 
 	public IEnumerator BlurPulse()
 	{
+        pulse = true;
 		bool dePulse = false;
+        enabled = true;
+
 		while (pulse)
 		{
-			blurSpread += 0.05f;
+			blurSpread += 0.1f;
 			if (blurSpread >= 1f)
 			{
 				pulse = false;
@@ -137,8 +140,8 @@ public class Blur : MonoBehaviour
 		}
 		while(dePulse)
 		{
-			blurSpread -= 0.05f;
-			if(blurSpread <= 0.05f)
+			blurSpread -= 0.1f;
+			if(blurSpread <= 0.1f)
 			{
 				blurSpread = 0f;
 				enabled = false;
@@ -147,9 +150,18 @@ public class Blur : MonoBehaviour
 			yield return new WaitForSeconds(.05f);
 		}
 	}
-	// temp functions for the first play test
-	// this funciton will constantly increase the blur effect until progBlur is set to false.
-	public IEnumerator ProgressiveBlur()
+
+    //Will start another blur pulse after the given time
+    public IEnumerator StartBlurTimer(float secondsUntilBlur)
+    {
+        yield return new WaitForSeconds(secondsUntilBlur);
+
+        pulse = true;
+        StartCoroutine(BlurPulse());
+    }
+    // temp functions for the first play test
+    // this funciton will constantly increase the blur effect until progBlur is set to false.
+    public IEnumerator ProgressiveBlur()
 	{
 		enabled = true;
 
@@ -166,27 +178,19 @@ public class Blur : MonoBehaviour
 	}
 
 	// this function will stop the blur effect
-	public void StopAndResetBlur()
-	{
-		enabled = false;
-		progBlur = false;
-		blurSpread = startSpread;
-		iterations = startIterations;
-		StartBlurTimer ();
+	//public void StopAndResetBlur()
+	//{
+	//	enabled = false;
+	//	progBlur = false;
+	//	blurSpread = startSpread;
+	//	iterations = startIterations;
+	//	StartBlurTimer ();
 
-		//yield return new WaitForSeconds (secondsUntilBlurStartsAgain);
+	//	//yield return new WaitForSeconds (secondsUntilBlurStartsAgain);
 
-		//progBlur = true;
-		Invoke ("SetProgBlur", secondsUntilBlurStartsAgain);
-	}
-
-	public IEnumerator StartBlurTimer()
-	{
-		yield return new WaitForSeconds (secondsUntilBlurStartsAgain);
-
-		progBlur = true;
-		StartCoroutine(ProgressiveBlur());
-	}
+	//	//progBlur = true;
+	//	Invoke ("SetProgBlur", secondsUntilBlurStartsAgain);
+	//}
 	private void SetProgBlur()
 	{
 		StartCoroutine(ProgressiveBlur());
