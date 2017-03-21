@@ -30,7 +30,7 @@ public class MakeDinnerTask : MonoBehaviour {
         HSP = g.GetComponent<HoldAndSetPlates> ();
 		HSF = go.GetComponent<HoldAndSetForksKnives> ();
 		SK = t1.GetComponent<SinkKnob> ();
-		OK = t.GetComponent<OvenKnobs> ();
+		//OK = t.GetComponent<OvenKnobs> ();
 		HSS = h.GetComponent<HoldAndSetSandwiches> ();
 		CC = go3.GetComponent<HoldAndSetCookies>(); // Caden Added for cooking the cookies
 		OEM = temp.GetComponent<OCDEffectManager>();
@@ -50,7 +50,7 @@ public class MakeDinnerTask : MonoBehaviour {
 			StartCoroutine (MakeDinnerText ());
 				}
 		}
-		if (OK.isStoveChecked == true && SK.areHandsWashed == true) {
+		if (OvenKnobs.isStoveChecked == true && SK.areHandsWashed == true) {
 			GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().enabled = true;
 			GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().text = "Make Dinner!";
 			if (isTrue2 == false) {

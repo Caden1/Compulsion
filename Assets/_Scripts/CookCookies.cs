@@ -78,10 +78,11 @@ public class CookCookies : MonoBehaviour
     {
         if (ovenDoorScript.IsOpen == false) // To make sure the oven door stays closed in order for the cooking to stop.
         {
-            Destroy(uncookedCookiesReference);
             cookedCookiesReference.GetComponent<MeshRenderer>().enabled = true;
             cookedCookiesReference.GetComponent<BoxCollider>().enabled = true;
             audio.PlayOneShot(foodDone, foodDoneVolume);
+            //Debug.Log(gameObject.name);
+            Destroy(uncookedCookiesReference);
         }
         else
         {

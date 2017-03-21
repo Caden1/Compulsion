@@ -9,7 +9,7 @@ public class OvenKnobs : MonoBehaviour
     private static Dictionary<string, bool> knobSet = new Dictionary<string, bool>();
 
     public float speed = 200f;
-	public bool isStoveChecked = false;
+	public static bool isStoveChecked = false;
 	public SinkKnob SK;
 
     private bool isOn;
