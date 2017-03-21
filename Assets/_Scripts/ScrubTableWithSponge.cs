@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class ScrubTableWithSponge : MonoBehaviour
 {
-    public Blur blur;
+	public OCDEffectManager blur;
 
     private static bool sponge;
-
     private Transform spongePosition;
     private bool scrubTable;
     private bool scrubLeftDir;
@@ -17,6 +16,9 @@ public class ScrubTableWithSponge : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+		GameObject g = GameObject.FindGameObjectWithTag ("OCDManager");
+		blur = g.GetComponent<OCDEffectManager> ();
+
         spongePosition = GameObject.Find("KitchenTableCollider").transform.GetChild(6); // Gets the transform of the sponge on the table.
         sponge = false;
         scrubTable = false;
@@ -64,7 +66,8 @@ public class ScrubTableWithSponge : MonoBehaviour
         scrubTable = false;
         spongePosition.GetComponent<MeshRenderer>().enabled = false;
 
-        // CALL FUNCTION FROM BLUR TO STOP THE OCD EFFECT HERE
+        // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
+        blur.StopOCDTimer();
     }
 
     public void Scrub()
@@ -81,7 +84,13 @@ public class ScrubTableWithSponge : MonoBehaviour
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+			//Re enabling table objects after we scrub the table
+
 			GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = true;
+			GameObject.Find ("ForkKnifePickup").GetComponent<BoxCollider> ().enabled = true;
+
+			//Removing text and changing exisiting ones to match our Main task for Task 1
+
 			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
 			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }

@@ -31,6 +31,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
             objectToHold.SendMessage("SetVarTrue", SendMessageOptions.DontRequireReceiver); // Set boolean in each script so you can set down items properly.
         }
+        Debug.Log("Items Carried; " + itemsCarried);
     }
 
     public void SetDown()
