@@ -22,7 +22,6 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
     public void PickUpAndHold(GameObject objectToHold)
     {
-        Debug.Log("HERE2!");
         if (itemsCarried == 0) // So only one item can be held at a time
         {
             objectToHold.transform.position = playerCarryPosition.position; // Set the object new position to this one. Close to the player.

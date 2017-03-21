@@ -8,7 +8,10 @@ public class SinkKnob : MonoBehaviour {
     public float speed = 90f;
 	public HoldAndSetPlates HSP;
 	public HoldAndSetForksKnives HSF;
+	public OCDEffectManager OEM;
 	public MakeDinnerTask MDT;
+	public bool areHandsWashed = false;
+	public OvenKnobs OK;
 
     private bool isOpen;
     private Quaternion closed;
@@ -28,10 +31,15 @@ public class SinkKnob : MonoBehaviour {
     }
 
     // Use this for initialization
-    private void Start()
+    public void Start()
     {
-		GameObject g = GameObject.FindGameObjectWithTag ("Task2");
-		MDT = g.GetComponent<MakeDinnerTask> ();
+		areHandsWashed = false;
+		GameObject temp = GameObject.FindGameObjectWithTag ("Activate");
+		OK = temp.GetComponent<OvenKnobs> ();
+		GameObject g = GameObject.FindGameObjectWithTag ("OCDManager");
+		OEM = g.GetComponent<OCDEffectManager> ();
+		GameObject go = GameObject.FindGameObjectWithTag ("Task2");
+		MDT = go.GetComponent<MakeDinnerTask> ();
         isOpen = false;
         water = GameObject.Find("WaterParticleEffect").GetComponent<ParticleSystem>();
         water.Stop();
@@ -54,7 +62,7 @@ public class SinkKnob : MonoBehaviour {
         isOpen = !isOpen;
     }
 
-    private IEnumerator Swing()
+    public IEnumerator Swing()
     {
         Debug.Log(Quaternion.Angle(transform.rotation, target));
         while (Quaternion.Angle(transform.rotation, target) != 0)
@@ -70,9 +78,10 @@ public class SinkKnob : MonoBehaviour {
 			water.Stop ();
 			if (MDT.OCDTasksActivated == true) {
 				Debug.Log ("Hands have been washed, delete this shitty text");
-				GameObject.FindGameObjectWithTag ("OCDKnobs").GetComponent<Text> ().enabled = false;
-				GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().text = "Check Knobs!";
-			}
+				GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().enabled = false;
+				areHandsWashed = true;
+			} else
+				areHandsWashed = false;
 		}
 		
     }

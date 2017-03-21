@@ -12,7 +12,7 @@ public class OCDEffectManager : MonoBehaviour {
     private float timeSinceLastOCDAttack = 0;
     private float timeUntilIncreasedEffects = 60;
     private bool activeAttack = false;
-    private float timeUntilEffect = 7.5f;
+    private float timeUntilEffect = 10f;
     private float timeSinceLastEffect = 0;
 
     void Start ()

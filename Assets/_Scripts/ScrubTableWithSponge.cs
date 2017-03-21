@@ -84,7 +84,13 @@ public class ScrubTableWithSponge : MonoBehaviour
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+			//Re enabling table objects after we scrub the table
+
 			GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = true;
+			GameObject.Find ("ForkKnifePickup").GetComponent<BoxCollider> ().enabled = true;
+
+			//Removing text and changing exisiting ones to match our Main task for Task 1
+
 			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
 			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OvenKnobs : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class OvenKnobs : MonoBehaviour
     private static Dictionary<string, bool> knobSet = new Dictionary<string, bool>();
 
     public float speed = 200f;
+	public bool isStoveChecked = false;
+	public SinkKnob SK;
 
     private bool isOn;
     private int knobCount = 4;
@@ -19,8 +22,10 @@ public class OvenKnobs : MonoBehaviour
 
 
     // Use this for initialization
-    void Start ()
+    public void Start ()
     {
+		GameObject g = GameObject.FindGameObjectWithTag ("Activate");
+		SK = g.GetComponent<SinkKnob> ();
         isOn = false;
         off = transform.rotation;
         on = Quaternion.AngleAxis(-135f, transform.up) * transform.rotation;
@@ -57,13 +62,15 @@ public class OvenKnobs : MonoBehaviour
 
             if (complete)
             {
+				isStoveChecked = true;
                 knobSet.Clear(); // Clear the knob set so it doesn't continue to execute this statement
-
-                // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
-                blur.StopOCDTimer();
+				GameObject.FindGameObjectWithTag ("OCDKnobs").GetComponent<Text> ().enabled = false;
+				// Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
+				blur.StopOCDTimer ();
+				}
             }
         }
-    }
+    
 
     private IEnumerator Swing()
     {

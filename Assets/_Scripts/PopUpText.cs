@@ -10,11 +10,21 @@ public class PopUpText : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		
 		GameObject g = GameObject.FindGameObjectWithTag ("OCDManager");
 		OEM = g.GetComponent<OCDEffectManager> ();
 		GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
 		GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().enabled = false;
         GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = false;
+		GameObject.Find ("ForkKnifePickup").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("pCylinder26").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("pCylinder27").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("pCylinder28").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("pCylinder29").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("UncookedCookies").GetComponent<BoxCollider> ().enabled = false;
+		GameObject.Find ("2SandwichesPickUp").GetComponent<BoxCollider> ().enabled = false;
+
+
 	}
 	
 	// Update is called once per frame
@@ -76,8 +86,7 @@ public class PopUpText : MonoBehaviour {
 	}
 	public IEnumerator ScrubTableTask()
 	{
-		OEM.performOCDEffects = true;
-		Debug.Log (OEM.performOCDEffects);
+		OEM.StartOCDTimer ();
 		GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().enabled = true;
 		yield return null;
 	}

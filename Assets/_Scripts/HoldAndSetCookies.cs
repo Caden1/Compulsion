@@ -5,6 +5,7 @@ using UnityEngine;
 public class HoldAndSetCookies : MonoBehaviour
 {
     public static bool cookedCookies;
+	public bool areCookiesCooked;
     private GameObject cookedCookiesReference;
 
     // Use this for initialization
@@ -22,9 +23,9 @@ public class HoldAndSetCookies : MonoBehaviour
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
         }
         else if (gameObject.name == "KitchenTableCollider" && cookedCookies == true)
-        {
+		{
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-
+			areCookiesCooked = true;
             Destroy(cookedCookiesReference); // Destroy the original plates.
             gameObject.transform.GetChild(7).GetComponent<MeshRenderer>().enabled = true;
             cookedCookies = false;
