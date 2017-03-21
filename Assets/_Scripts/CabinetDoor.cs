@@ -8,6 +8,7 @@ public class CabinetDoor : MonoBehaviour {
     public bool swingClockwise;
 
     private bool isOpen;
+    private Transform parent;
     private Quaternion closed;
     private Quaternion open;
     private Quaternion target;
@@ -17,11 +18,12 @@ public class CabinetDoor : MonoBehaviour {
     private void Start()
     {
         isOpen = false;
-        closed = transform.rotation;
+        parent = transform.parent;
+        closed = parent.rotation;
         if(swingClockwise)
-            open = Quaternion.AngleAxis(90f, Vector3.up) * transform.rotation;
+            open = Quaternion.AngleAxis(80f, Vector3.up) * parent.rotation;
         else
-            open = Quaternion.AngleAxis(-90f, Vector3.up) * transform.rotation;
+            open = Quaternion.AngleAxis(-80f, Vector3.up) * parent.rotation;
 
         target = closed;
     }
@@ -45,7 +47,7 @@ public class CabinetDoor : MonoBehaviour {
         Debug.Log(Quaternion.Angle(transform.rotation, target));
         while(Quaternion.Angle(transform.rotation, target) != 0)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
+            parent.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
         }
     }
