@@ -33,7 +33,7 @@ public class OCDEffectManager : MonoBehaviour {
             timeSinceLastEffect += Time.deltaTime;
 			//Debug.Log (timeSinceLastOCDAttack);
 
-            if (timeSinceLastOCDAttack <= timeUntilIncreasedEffects && !activeAttack)
+            if (!activeAttack)
             {
                 if (timeSinceLastEffect >= timeUntilEffect)
                 {
@@ -73,7 +73,7 @@ public class OCDEffectManager : MonoBehaviour {
     }
     private void ResetEffects()
     {
-        timeUntilEffect = 20;
+        timeUntilEffect = 10;
         activeAttack = false;
         timeSinceLastOCDAttack = 0;
         timeSinceLastEffect = 0;
