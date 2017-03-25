@@ -12,6 +12,9 @@ public class ScrubTableWithSponge : MonoBehaviour
     private bool scrubTable;
     private bool scrubLeftDir;
     private GameObject spongeReference;
+    private Transform spongeReferencePosition;
+
+    private GameObject newSpongeAfterScrubbing;
 
     // Use this for initialization
     void Start ()
@@ -25,6 +28,8 @@ public class ScrubTableWithSponge : MonoBehaviour
         scrubLeftDir = true;
 
         spongeReference = GameObject.Find("Sponge"); // Need a reference to the sponge.
+
+        newSpongeAfterScrubbing = GameObject.Find("NewSponge");
     }
 
     // Update is called once per frame
@@ -68,6 +73,8 @@ public class ScrubTableWithSponge : MonoBehaviour
 
         // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
         blur.StopOCDTimer();
+        //spongeReference.transform.GetComponent<MeshRenderer>().enabled = true;
+        newSpongeAfterScrubbing.transform.GetComponent<MeshRenderer>().enabled = true;
     }
 
     public void Scrub()
@@ -79,8 +86,9 @@ public class ScrubTableWithSponge : MonoBehaviour
         else if (gameObject.name == "KitchenTableCollider" && sponge == true)
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-			//Debug.Log ("Table has been scrubbed");
+            //Debug.Log ("Table has been scrubbed");
             Destroy(spongeReference);
+            spongeReference.transform.GetComponent<MeshRenderer>().enabled = false;
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
@@ -94,6 +102,14 @@ public class ScrubTableWithSponge : MonoBehaviour
 			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
 			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }
+        /*
+        else if (gameObject.name == "SpongeCollider" && scrubTable == false) // To put the sponge back by the sink
+        {
+            SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
+            Destroy(spongeReference);
+            gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+        }
+        */
     }
 
     public void SetVarTrue()
