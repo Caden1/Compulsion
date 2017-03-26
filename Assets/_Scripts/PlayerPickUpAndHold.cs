@@ -11,6 +11,10 @@ public class PlayerPickUpAndHold : MonoBehaviour
 	public PopUpText tempObj;
 	int cnt = 0;
 
+    //private static bool readyToLerp;
+
+    //private GameObject objectHolding;
+
     // Use this for initialization
     void Start()
     {
@@ -18,12 +22,29 @@ public class PlayerPickUpAndHold : MonoBehaviour
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform; // The players position.
 
         itemsCarried = 0;
+
+        //readyToLerp = false;
     }
+
+    /*
+    void Update()
+    {
+        if (readyToLerp == true)
+        {
+            objectHolding.transform.position = Vector3.Lerp(objectHolding.transform.position, playerCarryPosition.position, Time.deltaTime * 5.0f);
+
+            //Debug.Log("Still Executing");
+        }
+    }
+    */
 
     public void PickUpAndHold(GameObject objectToHold)
     {
         if (itemsCarried == 0) // So only one item can be held at a time
         {
+            //readyToLerp = true;
+            //objectHolding = objectToHold;
+            //objectToHold.transform.position = Vector3.Lerp(objectToHold.transform.position, playerCarryPosition.position, Time.deltaTime * 2.0f);
             objectToHold.transform.position = playerCarryPosition.position; // Set the object new position to this one. Close to the player.
             objectToHold.transform.parent = playerPosition; // Make the object a child to the player. For carrying
 
@@ -31,7 +52,13 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
             objectToHold.SendMessage("SetVarTrue", SendMessageOptions.DontRequireReceiver); // Set boolean in each script so you can set down items properly.
         }
-        Debug.Log("Items Carried; " + itemsCarried);
+        /*
+        else
+        {
+            readyToLerp = false;
+        }
+        */
+        //Debug.Log("Items Carried: " + itemsCarried);
     }
 
     public void SetDown()
