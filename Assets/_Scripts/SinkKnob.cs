@@ -39,7 +39,7 @@ public class SinkKnob : MonoBehaviour {
 		GameObject g = GameObject.FindGameObjectWithTag ("OCDManager");
 		OEM = g.GetComponent<OCDEffectManager> ();
 		GameObject go = GameObject.FindGameObjectWithTag ("Task2");
-		MDT = go.GetComponent<MakeDinnerTask> ();
+		//MDT = go.GetComponent<MakeDinnerTask> ();
         isOpen = false;
         water = GameObject.Find("WaterParticleEffect").GetComponent<ParticleSystem>();
         water.Stop();
