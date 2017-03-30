@@ -165,7 +165,7 @@ public class GameManager : MonoBehaviour
     /// <param name="task">GameManager uses task to keep track of which OCD is calling the method.</param>
     public void IncreaseInfluence(GameObject task)
     {
-        if (ocdLock)
+        lock (ocdLock)
         {
             if (activeOCD.ContainsKey(task))
             {
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void CheckStress()
     {
-        int stress = totalInfluence % stressPerOCDEffectLevel;
+        int stress = totalInfluence / stressPerOCDEffectLevel;
         if (stress != stressLevel)
         {
             stressLevel = stress;
@@ -191,8 +191,11 @@ public class GameManager : MonoBehaviour
                 GameOver(false);
             }
 
+            Debug.Log("StressLevel = " + stressLevel);
             // UPDATE OCDEffectManager about new level
         }
+        Debug.Log("Influence = " + totalInfluence);
+
     }
 
     /// <summary>
@@ -242,29 +245,33 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private IEnumerator RandomOCDAttack()
     {
-        float wait = 0;
-        int randomInt = 0;
-        bool keyThatIsContaind = false;
-        while (true)
+        yield return null;
+        if (randomOCDEvents.Length != 0)
         {
-            wait = Random.Range(randomOCDTimerMin, randomOCDTimerMax);
-            randomInt = Random.Range(0, randomOCDEvents.Length);
-            lock (ocdLock) { keyThatIsContaind = activeOCD.ContainsKey(randomOCDEvents[randomInt]); }
-            while (keyThatIsContaind)
+            float wait = 0;
+            int randomInt = 0;
+            bool keyThatIsContaind = false;
+            while (true)
             {
-                yield return new WaitForSeconds(1f);
+                wait = Random.Range(randomOCDTimerMin, randomOCDTimerMax);
                 randomInt = Random.Range(0, randomOCDEvents.Length);
-            }
+                lock (ocdLock) { keyThatIsContaind = activeOCD.ContainsKey(randomOCDEvents[randomInt]); }
+                while (keyThatIsContaind)
+                {
+                    yield return new WaitForSeconds(1f);
+                    randomInt = Random.Range(0, randomOCDEvents.Length);
+                }
 
-            lock (ocdLock)
-            {
-                activeOCD.Add(randomOCDEvents[randomInt], new OCDTask(randomOCDEvents[randomInt]));
-                ocdCurrentCount++;
-                totalInfluence += activeOCD[randomOCDEvents[randomInt]].Influence;
-            }
+                lock (ocdLock)
+                {
+                    activeOCD.Add(randomOCDEvents[randomInt], new OCDTask(randomOCDEvents[randomInt]));
+                    ocdCurrentCount++;
+                    totalInfluence += activeOCD[randomOCDEvents[randomInt]].Influence;
+                }
 
-            randomOCDEvents[randomInt].SendMessage("Activate");
-            yield return new WaitForSeconds(wait);
+                randomOCDEvents[randomInt].SendMessage("Activate");
+                yield return new WaitForSeconds(wait);
+            }
         }
     }
 
