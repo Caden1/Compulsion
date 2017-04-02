@@ -63,7 +63,7 @@ public class OvenKnobs : MonoBehaviour
 					isStoveChecked = true;
 					knobSet.Clear (); // Clear the knob set so it doesn't continue to execute this statement
 
-					startOvenKnobOCDScript.CleanUp();
+					startOvenKnobOCDScript.CleanUp(); // Clean up the OCD task. Function in the StartOvenKnobOCD script.
 				}
 			}
 		}

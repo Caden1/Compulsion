@@ -7,7 +7,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 	[HideInInspector]
 	public bool isActivated; // Set to true when the OCD task is activated.
 
-	public OvenKnobs ovenKnobsScript;
+	public OvenKnobs ovenKnobsScript; // Drag one of the oven knobs into the Untiy Inspector for this.
 
 	private GameObject gameManagerObject;
 
@@ -28,7 +28,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 
 				gameManagerObject.SendMessage("StartOCD", gameObject);
 
-				StartCoroutine(OCDActiveLength());
+				StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
 			}
 		}
 	}
@@ -37,9 +37,9 @@ public class StartOvenKnobOCD : MonoBehaviour
 	{
 		gameManagerObject.SendMessage("EndOCD", gameObject);
 
-		StopCoroutine(OCDActiveLength());
+		StopCoroutine(OCDActiveLength()); // Stop the OCDActiveLength process
 
-		StartCoroutine(ResetTimer());
+        StartCoroutine(ResetTimer());
 	}
 
 	/// <summary>
@@ -49,7 +49,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 	{
 		yield return new WaitForSeconds(60f);
 
-		isActivated = false;
+        isActivated = false;
 	}
 
 	private IEnumerator OCDActiveLength()

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ScrubTableWithSponge : MonoBehaviour
 {
 	public OCDEffectManager blur;
+    private StickyNoteMakeDinner stickyNoteMakeDinnerScript;
 
     private static bool sponge;
     private Transform spongePosition;
@@ -15,6 +16,7 @@ public class ScrubTableWithSponge : MonoBehaviour
     private Transform spongeReferencePosition;
 
     private GameObject newSpongeAfterScrubbing;
+    private KitchenTableCollider kitchenTableColliderScript;
 
     // Use this for initialization
     void Start ()
@@ -30,6 +32,10 @@ public class ScrubTableWithSponge : MonoBehaviour
         spongeReference = GameObject.Find("Sponge"); // Need a reference to the sponge.
 
         newSpongeAfterScrubbing = GameObject.Find("NewSponge");
+
+        stickyNoteMakeDinnerScript = GameObject.Find("StickyNoteMakeDinner").GetComponent<StickyNoteMakeDinner>();
+
+        kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
     }
 
     // Update is called once per frame
@@ -70,15 +76,15 @@ public class ScrubTableWithSponge : MonoBehaviour
     {
         scrubTable = false;
         spongePosition.GetComponent<MeshRenderer>().enabled = false;
-
-        // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
-        blur.StopOCDTimer();
-        //spongeReference.transform.GetComponent<MeshRenderer>().enabled = true;
         newSpongeAfterScrubbing.transform.GetComponent<MeshRenderer>().enabled = true;
+
+        stickyNoteMakeDinnerScript.CleanUp();
     }
 
     public void Scrub()
     {
+        kitchenTableColliderScript.EnableCollider(); // Increments the static integer and enables the collider.
+
         if (gameObject.name == "Sponge" && sponge == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
@@ -99,8 +105,8 @@ public class ScrubTableWithSponge : MonoBehaviour
 
 			//Removing text and changing exisiting ones to match our Main task for Task 1
 
-			GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
-			GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
+			//GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
+			//GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }
         /*
         else if (gameObject.name == "SpongeCollider" && scrubTable == false) // To put the sponge back by the sink
