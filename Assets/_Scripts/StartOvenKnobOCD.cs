@@ -6,16 +6,20 @@ public class StartOvenKnobOCD : MonoBehaviour
 {
 	[HideInInspector]
 	public bool isActivated; // Set to true when the OCD task is activated.
-
 	public OvenKnobs ovenKnobsScript; // Drag one of the oven knobs into the Untiy Inspector for this.
-
 	private GameObject gameManagerObject;
+	private GameManager gameManagerScript;
+	private Coroutine cor;
+	private Coroutine cor2;
+
+	private FloatingText floatingtext;
 
 	private void Start()
 	{
 		isActivated = false;
-
 		gameManagerObject = GameObject.Find("GameManager");
+		gameManagerScript = GameObject.Find ("GameManager").GetComponent<GameManager>();
+		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
 	}
 
 	void OnTriggerExit(Collider other)
@@ -28,18 +32,11 @@ public class StartOvenKnobOCD : MonoBehaviour
 
 				gameManagerObject.SendMessage("StartOCD", gameObject);
 
-				StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
+				cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
+
+				cor = StartCoroutine(StartOCDTextPulse());
 			}
 		}
-	}
-
-	public void CleanUp()
-	{
-		gameManagerObject.SendMessage("EndOCD", gameObject);
-
-		StopCoroutine(OCDActiveLength()); // Stop the OCDActiveLength process
-
-        StartCoroutine(ResetTimer());
 	}
 
 	/// <summary>
@@ -54,15 +51,32 @@ public class StartOvenKnobOCD : MonoBehaviour
 
 	private IEnumerator OCDActiveLength()
 	{
-		while (true) 
+		while (true) // While the coroutine is active, this loop will continue to execute.
 		{
 			yield return new WaitForSeconds (10);
 
-			// Make the text above this one a decent size (knobs are a big one).
-			// Start another coroutine here that calls an IEnumerable function that makes the 3D text pulse (Use a place-holder for now).
-			// After this ten seconds, make it pulse faster. After 5 times running through, cap it.
+			floatingtext.Increase(); // The text pulse is in sync witht he IncreaseInfluence and therefore with the OCD effects.
 
 			gameManagerObject.SendMessage("IncreaseInfluence", gameObject);
 		}
+	}
+
+	private IEnumerator StartOCDTextPulse()
+	{
+		yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+		floatingtext.Activate();
+	}
+
+	public void CleanUp()
+	{
+		gameManagerObject.SendMessage("EndOCD", gameObject);
+
+		StopCoroutine(cor2); // Stop the OCDActiveLength process
+
+		StartCoroutine(ResetTimer());
+
+		floatingtext.Deactivate();
+
+		StopCoroutine(cor); // Stop the StartOCDTextPulse process
 	}
 }

@@ -12,6 +12,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
     private GameObject sponge;
     private GameObject kitchenTableCollider;
     private KitchenTableCollider kitchenTableColliderScript;
+	private Coroutine cor;
+	private Coroutine cor2;
+
+	private FloatingText floatingtext;
 
     // Use this for initialization
     void Start ()
@@ -20,6 +24,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
         sponge = GameObject.Find("Sponge");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
+		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
 	
     public void Activate()
@@ -32,13 +37,11 @@ public class StickyNoteMakeDinner : MonoBehaviour
         // Enable box colliders needed.
         sponge.GetComponent<BoxCollider>().enabled = true;
 
-
-        // Set a boolean to make sure turning on the faucet will activate washing hands
-
-
         gameManagerObject.SendMessage("StartOCD", gameObject);
 
-        StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
+		cor2 = StartCoroutine(OCDActiveLength());
+
+		cor = StartCoroutine(StartOCDTextPulse());
     }
 
     private IEnumerator OCDActiveLength()
@@ -47,13 +50,17 @@ public class StickyNoteMakeDinner : MonoBehaviour
         {
             yield return new WaitForSeconds(10);
 
-            // Make the text above this one a decent size (knobs are a big one).
-            // Start another coroutine here that calls an IEnumerable function that makes the 3D text pulse (Use a place-holder for now).
-            // After this ten seconds, make it pulse faster. After 5 times running through, cap it.
+			floatingtext.Increase(); // The text pulse is in sync witht he IncreaseInfluence and therefore with the OCD effects.
 
             gameManagerObject.SendMessage("IncreaseInfluence", gameObject);
         }
     }
+
+	private IEnumerator StartOCDTextPulse()
+	{
+		yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+		floatingtext.Activate();
+	}
 
     public void CleanUp()
     {
@@ -66,6 +73,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
         gameManagerObject.SendMessage("EndOCD", gameObject);
 
-        StopCoroutine(OCDActiveLength()); // Stop the OCDActiveLength process
+		StopCoroutine(cor2); // Stop the OCDActiveLength process
+
+		floatingtext.Deactivate();
+
+		StopCoroutine(cor); // Stop the StartOCDTextPulse process
     }
 }

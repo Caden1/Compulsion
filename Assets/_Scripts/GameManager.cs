@@ -268,7 +268,7 @@ public class GameManager : MonoBehaviour
                     ocdCurrentCount++;
                     totalInfluence += activeOCD[randomOCDEvents[randomInt]].Influence;
                 }
-
+					
                 randomOCDEvents[randomInt].SendMessage("Activate");
                 yield return new WaitForSeconds(wait);
             }

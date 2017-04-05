@@ -13,18 +13,16 @@ public class WashHands : MonoBehaviour
     public float washingHandsVolume = 0.5f;
     private AudioSource audio;
 
+	private RandomWashHands randomWashHandsScript;
+
     // Use this for initialization
     void Start ()
     {
         GameObject sinkKnob = GameObject.Find("SinkKnob");
-
         sinkKnobScript = sinkKnob.GetComponent<SinkKnob>();
-
         stopWashingHands = false;
-
         audio = GetComponent<AudioSource>();
-
-        blur = GameObject.Find("OCDEffectManager").GetComponent<OCDEffectManager>();
+		randomWashHandsScript = GameObject.Find("RandomWashHands").GetComponent<RandomWashHands>();
     }
 	
 	// Update is called once per frame
@@ -34,10 +32,9 @@ public class WashHands : MonoBehaviour
         {
             audio.PlayOneShot(washingHands, washingHandsVolume);
 
-            // Call StopOCDTimer from the OCDEffectManager script to stop the OCD effects.
-            blur.StopOCDTimer();
-
             stopWashingHands = true;
+
+			randomWashHandsScript.CleanUp();
         }
 	}
 }
