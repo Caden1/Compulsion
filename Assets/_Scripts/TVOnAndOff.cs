@@ -21,13 +21,15 @@ public class TVOnAndOff : MonoBehaviour
     {
         if (isOn == false)
         {
-            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            // Turn TV on here. Use Cameron's Shooting Stars vid
+            //gameObject.transform.GetChild(0).gameObject.SetActive(true);
             timesTurnedOnAndOff++;
             isOn = true;
         }
         else
         {
-            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            // Turn TV off here. Use Cameron's Shooting Stars vid
+            //gameObject.transform.GetChild(0).gameObject.SetActive(false);
             timesTurnedOnAndOff++;
             isOn = false;
         }

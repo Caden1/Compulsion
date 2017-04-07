@@ -11,8 +11,6 @@ public class HoldAndSetSandwiches : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        
-
 		areSandwichesPlaced = false;
 
         sandwichReference = GameObject.Find("2SandwichesPickUp"); // Need a reference to the original sandwiches.
@@ -23,11 +21,11 @@ public class HoldAndSetSandwiches : MonoBehaviour
         if (gameObject.name == "2SandwichesPickUp" && twoSandwiches == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
-			Debug.Log ("Here!");
+			//Debug.Log ("Here!");
         }
         else if (gameObject.name == "KitchenTableCollider" && twoSandwiches == true)
         {
-			Debug.Log ("Here!!!");
+			//Debug.Log ("Here!!!");
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
 
             Destroy(sandwichReference); // Destroy the original plates.
