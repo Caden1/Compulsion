@@ -8,13 +8,16 @@ public class TVOnAndOff : MonoBehaviour
 
     private static int timesTurnedOnAndOff;
     private static bool isOn;
+    private LivingRoomTrigger livingRoomTriggerScript;
 
     // Use this for initialization
-	void Start ()
+    void Start ()
     {
         timesTurnedOnAndOff = 0;
 
         isOn = false;
+
+        livingRoomTriggerScript = GameObject.Find("LivingRoomTrigger").GetComponent<LivingRoomTrigger>();
     }
 
     public void Activate()
@@ -39,7 +42,7 @@ public class TVOnAndOff : MonoBehaviour
             timesTurnedOnAndOff = 0;
             //Debug.Log("Complete");
 
-            // STOP OCD EFFECTS HERE (SEND MESSAGE BACK TO CAMERON TO STOP IT??)
+            livingRoomTriggerScript.CleanUp();
         }
     }
 }

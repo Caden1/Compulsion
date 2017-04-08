@@ -24,14 +24,17 @@ public class StickyNoteMakeDinner : MonoBehaviour
         sponge = GameObject.Find("Sponge");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
-		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+        floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
 	
     public void Activate()
     {
         // ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
         // Disable sticky note, but do not destroy it. It's needed by the GameManager.
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        gameObject.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+        gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
         // Enable box colliders needed.

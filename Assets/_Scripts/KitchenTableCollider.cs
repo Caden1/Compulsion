@@ -18,6 +18,7 @@ public class KitchenTableCollider : MonoBehaviour
     /// </summary>
     public void EnableCollider()
     {
+        //Debug.Log("Made it!");
         colliderEnabledCount++;
 
         if (gameObject.GetComponent<BoxCollider>().enabled == false) // Only enable if it isn't already
