@@ -17,6 +17,8 @@ public class RandomWashHands : MonoBehaviour
 
 	public void Activate()
 	{
+        Debug.Log("Random Wash Hands Activated!");
+
 		cor2 = StartCoroutine(OCDActiveLength());
 
 		cor = StartCoroutine(StartOCDTextPulse());
@@ -24,7 +26,9 @@ public class RandomWashHands : MonoBehaviour
 
 	public void CleanUp()
 	{
-		StopCoroutine(cor2); // Stop the OCDActiveLength process
+        gameManagerObject.SendMessage("EndOCD", gameObject); // End it so it can execute again.
+
+        StopCoroutine(cor2); // Stop the OCDActiveLength process
 
 		floatingtext.Deactivate();
 

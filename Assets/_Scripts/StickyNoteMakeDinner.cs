@@ -12,13 +12,13 @@ public class StickyNoteMakeDinner : MonoBehaviour
     private GameObject sponge;
     private GameObject kitchenTableCollider;
     private KitchenTableCollider kitchenTableColliderScript;
-	private Coroutine cor;
-	private Coroutine cor2;
+    private Coroutine cor;
+    private Coroutine cor2;
 
-	private FloatingText floatingtext;
+    private FloatingText floatingtext;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         gameManagerObject = GameObject.Find("GameManager");
         sponge = GameObject.Find("Sponge");
@@ -26,7 +26,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
-	
+
     public void Activate()
     {
         // ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
@@ -34,20 +34,14 @@ public class StickyNoteMakeDinner : MonoBehaviour
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
-
-        //gameObject.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-        //gameObject.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().enabled = false;
-        //gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
-        //gameObject.GetComponent<BoxCollider>().enabled = false;
-
         // Enable box colliders needed.
         sponge.GetComponent<BoxCollider>().enabled = true;
 
         gameManagerObject.SendMessage("StartOCD", gameObject);
 
-		cor2 = StartCoroutine(OCDActiveLength());
+        cor2 = StartCoroutine(OCDActiveLength());
 
-		cor = StartCoroutine(StartOCDTextPulse());
+        cor = StartCoroutine(StartOCDTextPulse());
     }
 
     private IEnumerator OCDActiveLength()
@@ -56,17 +50,17 @@ public class StickyNoteMakeDinner : MonoBehaviour
         {
             yield return new WaitForSeconds(10);
 
-			floatingtext.Increase(); // The text pulse is in sync witht he IncreaseInfluence and therefore with the OCD effects.
+            floatingtext.Increase(); // The text pulse is in sync witht he IncreaseInfluence and therefore with the OCD effects.
 
             gameManagerObject.SendMessage("IncreaseInfluence", gameObject);
         }
     }
 
-	private IEnumerator StartOCDTextPulse()
-	{
-		yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
-		floatingtext.Activate();
-	}
+    private IEnumerator StartOCDTextPulse()
+    {
+        yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+        floatingtext.Activate();
+    }
 
     public void CleanUp()
     {
@@ -79,10 +73,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
         gameManagerObject.SendMessage("EndOCD", gameObject);
 
-		StopCoroutine(cor2); // Stop the OCDActiveLength process
+        StopCoroutine(cor2); // Stop the OCDActiveLength process
 
-		floatingtext.Deactivate();
+        floatingtext.Deactivate();
 
-		StopCoroutine(cor); // Stop the StartOCDTextPulse process
+        StopCoroutine(cor); // Stop the StartOCDTextPulse process
     }
 }

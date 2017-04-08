@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScrubTableWithSponge : MonoBehaviour
 {
+    public OCDEffectManager blur;
     private StickyNoteMakeDinner stickyNoteMakeDinnerScript;
 
     private static bool sponge;
@@ -18,17 +19,23 @@ public class ScrubTableWithSponge : MonoBehaviour
     private KitchenTableCollider kitchenTableColliderScript;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
-        stickyNoteMakeDinnerScript = GameObject.Find("StickyNoteMakeDinner").GetComponent<StickyNoteMakeDinner>();
-        spongeReference = GameObject.Find("Sponge"); // Need a reference to the sponge.
-        newSpongeAfterScrubbing = GameObject.Find("NewSponge");
-        spongePosition = GameObject.Find("KitchenTableCollider").transform.GetChild(6); // Gets the transform of the sponge on the table.
+        GameObject g = GameObject.FindGameObjectWithTag("OCDManager");
+        blur = g.GetComponent<OCDEffectManager>();
 
+        spongePosition = GameObject.Find("KitchenTableCollider").transform.GetChild(6); // Gets the transform of the sponge on the table.
         sponge = false;
         scrubTable = false;
         scrubLeftDir = true;
+
+        spongeReference = GameObject.Find("Sponge"); // Need a reference to the sponge.
+
+        newSpongeAfterScrubbing = GameObject.Find("NewSponge");
+
+        stickyNoteMakeDinnerScript = GameObject.Find("StickyNoteMakeDinner").GetComponent<StickyNoteMakeDinner>();
+
+        kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
     }
 
     // Update is called once per frame
@@ -69,14 +76,13 @@ public class ScrubTableWithSponge : MonoBehaviour
     {
         scrubTable = false;
         spongePosition.GetComponent<MeshRenderer>().enabled = false;
-        newSpongeAfterScrubbing.GetComponent<MeshRenderer>().enabled = true;
+        newSpongeAfterScrubbing.transform.GetComponent<MeshRenderer>().enabled = true;
 
         stickyNoteMakeDinnerScript.CleanUp();
     }
 
     public void Scrub()
     {
-        // Problem here
         kitchenTableColliderScript.EnableCollider(); // Increments the static integer and enables the collider.
 
         if (gameObject.name == "Sponge" && sponge == false)
@@ -87,11 +93,20 @@ public class ScrubTableWithSponge : MonoBehaviour
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
             //Debug.Log ("Table has been scrubbed");
-            //spongeReference.transform.GetComponent<MeshRenderer>().enabled = false;
             Destroy(spongeReference);
+            spongeReference.transform.GetComponent<MeshRenderer>().enabled = false;
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+            //Re enabling table objects after we scrub the table
+
+            GameObject.Find("2PlatesPickup").GetComponent<BoxCollider>().enabled = true;
+            GameObject.Find("ForkKnifePickup").GetComponent<BoxCollider>().enabled = true;
+
+            //Removing text and changing exisiting ones to match our Main task for Task 1
+
+            //GameObject.FindGameObjectWithTag ("SetTable").GetComponent<Text> ().enabled = false;
+            //GameObject.FindGameObjectWithTag ("OCDScrub").GetComponent<Text> ().text = "Set the Table";
         }
         /*
         else if (gameObject.name == "SpongeCollider" && scrubTable == false) // To put the sponge back by the sink
