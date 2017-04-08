@@ -31,11 +31,14 @@ public class StickyNoteMakeDinner : MonoBehaviour
     {
         // ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
         // Disable sticky note, but do not destroy it. It's needed by the GameManager.
-        //gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = false;
-        gameObject.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().enabled = false;
-        gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
+
+
+        //gameObject.transform.GetChild(0).GetChild(0).GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.transform.GetChild(0).GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<BoxCollider>().enabled = false;
 
         // Enable box colliders needed.
         sponge.GetComponent<BoxCollider>().enabled = true;

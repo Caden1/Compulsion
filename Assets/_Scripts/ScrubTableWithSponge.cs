@@ -17,8 +17,8 @@ public class ScrubTableWithSponge : MonoBehaviour
     private GameObject newSpongeAfterScrubbing;
     private KitchenTableCollider kitchenTableColliderScript;
 
-
-    private void Awake()
+    // Use this for initialization
+    void Start ()
     {
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
         stickyNoteMakeDinnerScript = GameObject.Find("StickyNoteMakeDinner").GetComponent<StickyNoteMakeDinner>();
@@ -29,12 +29,6 @@ public class ScrubTableWithSponge : MonoBehaviour
         sponge = false;
         scrubTable = false;
         scrubLeftDir = true;
-    }
-
-    // Use this for initialization
-    void Start ()
-    {
-        
     }
 
     // Update is called once per frame
