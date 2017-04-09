@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-
 [ExecuteInEditMode]
 [AddComponentMenu("Image Effects/Blur/Blur")]
 public class Blur : MonoBehaviour

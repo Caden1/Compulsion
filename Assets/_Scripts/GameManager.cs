@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     private AudioSource playerSoundSource;              // The Player's mouth
     private Queue<AudioClip> queuedSounds;              // A queue of sounds in case multiple sound requests are made to this script
     private Dictionary<GameObject, OCDTask> activeOCD;  // A dictionary of currently running OCD effects and relevent data about each one.
+    private OCDEffectManager OEF;                       // Reference to the OCD Effect Manager
 
     private static readonly Object ocdLock = new Object();   // Lock for OCD related class members
     private static readonly Object soundLock = new Object(); // Lock for sound related class memeber
@@ -93,7 +94,7 @@ public class GameManager : MonoBehaviour
         isSoundPlaying = false;
         randomOCDTimerMax = randomOCDTimerMax > randomOCDTimerMin ? randomOCDTimerMax : randomOCDTimerMin;
         stressLevel = 0;
-
+        OEF = GameObject.FindGameObjectWithTag("OCDManager").GetComponent<OCDEffectManager>();
         // start game
         StartCoroutine(StartGame());
 
@@ -193,6 +194,7 @@ public class GameManager : MonoBehaviour
 
             Debug.Log("StressLevel = " + stressLevel);
             // UPDATE OCDEffectManager about new level
+            OEF.SetStressLevel(stressLevel);
         }
         Debug.Log("Influence = " + totalInfluence);
 
