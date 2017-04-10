@@ -52,6 +52,12 @@ public class FridgeDoor : MonoBehaviour {
 
         cor = StartCoroutine("Swing");
         isOpen = !isOpen;
+        //Play opening noise
+        if (isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlayGivenSoundRandomPitch(0);
+        }
+
     }
 
     private IEnumerator Swing()
@@ -60,6 +66,11 @@ public class FridgeDoor : MonoBehaviour {
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
+        }
+        //Play closing noise
+        if (!isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlayGivenSoundRandomPitch(1);
         }
     }
 

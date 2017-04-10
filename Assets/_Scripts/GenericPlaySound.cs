@@ -24,4 +24,10 @@ public class GenericPlaySound : MonoBehaviour {
         source.pitch = Random.Range(.9f, 1.1f);
         source.PlayOneShot(clip[Random.Range(0, clip.Length)], volume);
     }
+
+    public void PlayGivenSoundRandomPitch(int i, float volume = .7f)
+    {
+        source.pitch = Random.Range(.9f, 1.1f);
+        source.PlayOneShot(clip[i], volume);
+    }
 }
