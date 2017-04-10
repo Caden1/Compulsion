@@ -17,6 +17,7 @@ public class Drawer : MonoBehaviour {
     private GameObject gameManager;
     private FloatingText floatingtext;
 
+
 	// Use this for initialization
 	private void Start()
 	{
@@ -30,6 +31,7 @@ public class Drawer : MonoBehaviour {
 		target = closed;
         gameManager = GameObject.Find("GameManager");
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>();
+
 
     }
 
@@ -54,7 +56,7 @@ public class Drawer : MonoBehaviour {
             target = open;
             cor2 = StartCoroutine(OCDTimer());
         }
-
+        this.GetComponent<GenericPlaySound>().PlaySoundRandomPitch(1f);
         cor = StartCoroutine("Move");
         isOpen = !isOpen;
     }

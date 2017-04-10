@@ -18,6 +18,7 @@ public class CabinetDoor : MonoBehaviour {
     private GameObject gameManager;
     private FloatingText floatingtext;
 
+
     // Use this for initialization
     private void Start()
     {
@@ -33,6 +34,7 @@ public class CabinetDoor : MonoBehaviour {
         target = closed;
         gameManager = GameObject.Find("GameManager");
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>();
+
     }
 
     public void Activate()
@@ -59,15 +61,25 @@ public class CabinetDoor : MonoBehaviour {
 
         cor = StartCoroutine("Swing");
         isOpen = !isOpen;
+        //play opening noise
+        if (isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.2f);
+        }
     }
 
     private IEnumerator Swing()
     {
         Debug.Log(Quaternion.Angle(transform.rotation, target));
-        while(Quaternion.Angle(transform.rotation, target) != 0)
+        while (Quaternion.Angle(transform.rotation, target) != 0)
         {
             parent.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
+        }
+        //Play closing noise
+        if(!isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.2f);
         }
     }
 

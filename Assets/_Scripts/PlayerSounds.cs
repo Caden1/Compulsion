@@ -18,9 +18,9 @@ public class PlayerSounds : MonoBehaviour {
 
 	}
 
-    public void PlayBreathingSound()
+    public void PlayBreathingSound(float volume = .7f)
     {
         source.pitch = Random.Range(.95f, 1.05f);
-        source.PlayOneShot(breathing[Random.Range(0, 3)], .7f);
+        source.PlayOneShot(breathing[Random.Range(0, 3)], volume);
     }
 }
