@@ -5,7 +5,7 @@ using UnityEngine;
 public class HoldAndSetCookies : MonoBehaviour
 {
     public static bool cookedCookies;
-	public bool areCookiesCooked;
+	public static bool areCookiesCooked;
     private GameObject cookedCookiesReference;
 
     // Use this for initialization

@@ -7,7 +7,7 @@ public class HoldAndSetPlates : MonoBehaviour
 {
     public static bool twoPlates;
     private GameObject plateReference;
-	public bool setPlates;
+	public static bool setPlates;
 
     // Use this for initialization
     void Start ()

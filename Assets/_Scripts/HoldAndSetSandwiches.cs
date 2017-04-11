@@ -5,7 +5,7 @@ using UnityEngine;
 public class HoldAndSetSandwiches : MonoBehaviour
 {
     public static bool twoSandwiches;
-	public bool areSandwichesPlaced = false;
+	public static bool areSandwichesPlaced = false;
     private GameObject sandwichReference;
 
     // Use this for initialization

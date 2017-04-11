@@ -6,7 +6,7 @@ public class HoldAndSetForksKnives : MonoBehaviour
 {
     private static bool forkAndKnife;
     private GameObject forkAndKnifeReference;
-	public bool FKSet;
+	public static bool FKSet;
 
     // Use this for initialization
     void Start ()

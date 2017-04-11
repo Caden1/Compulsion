@@ -105,6 +105,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void CheckWinState()
     {
+		Debug.Log ("Tasks Completed: " + taskCompleteCount);
+		Debug.Log ("Task Count: " + totalTaskCount);
         if (taskCompleteCount == totalTaskCount && ocdCurrentCount == 0)
         {
             lock (soundLock) { queuedSounds.Clear(); }
