@@ -6,6 +6,7 @@ public class StickyNoteWaterPlants : MonoBehaviour
 {
     private GameObject gameManagerObject;
     private GameObject coffeeTableBooks;
+	private GameObject weedPlant;
     private Coroutine cor;
     private Coroutine cor2;
 
@@ -15,6 +16,7 @@ public class StickyNoteWaterPlants : MonoBehaviour
     void Start()
     {
         gameManagerObject = GameObject.Find("GameManager");
+		weedPlant = GameObject.Find ("WeedPlant");
         coffeeTableBooks = GameObject.Find("BooksCoffeeTablePickUp");
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
@@ -27,6 +29,7 @@ public class StickyNoteWaterPlants : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
         // Enable box colliders needed.
+		weedPlant.GetComponent<BoxCollider>().enabled = true;
         coffeeTableBooks.GetComponent<BoxCollider>().enabled = true;
 
         gameManagerObject.SendMessage("StartOCD", gameObject);

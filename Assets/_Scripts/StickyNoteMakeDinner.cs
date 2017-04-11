@@ -10,6 +10,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
 {
     private GameObject gameManagerObject;
     private GameObject sponge;
+	private GameObject plates;
+	private GameObject forksandKnives;
+	private GameObject cookies;
+	private GameObject sandwhiches;
     private GameObject kitchenTableCollider;
     private KitchenTableCollider kitchenTableColliderScript;
     private Coroutine cor;
@@ -22,6 +26,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
     {
         gameManagerObject = GameObject.Find("GameManager");
         sponge = GameObject.Find("Sponge");
+		plates = GameObject.Find ("2PlatesPickup");
+		forksandKnives = GameObject.Find ("ForkKnifePickup");
+		cookies = GameObject.Find ("UncookedCookies");
+		sandwhiches = GameObject.Find ("2SandwichesPickUp");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
@@ -36,6 +44,11 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
         // Enable box colliders needed.
         sponge.GetComponent<BoxCollider>().enabled = true;
+		plates.GetComponent<BoxCollider>().enabled = true;
+		forksandKnives.GetComponent<BoxCollider>().enabled = true;
+		cookies.GetComponent<BoxCollider>().enabled = true;
+		sandwhiches.GetComponent<BoxCollider>().enabled = true;
+		kitchenTableCollider.GetComponent<BoxCollider>().enabled = true;
 
         gameManagerObject.SendMessage("StartOCD", gameObject);
 
