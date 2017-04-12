@@ -10,7 +10,7 @@ public class BedroomTrigger : MonoBehaviour
     private GameManager gameManagerScript;
     private Coroutine cor;
     private Coroutine cor2;
-    private BoxCollider wrinkledSheets;
+    private BoxCollider messyBed;
 
     private FloatingText floatingtext;
 
@@ -21,7 +21,7 @@ public class BedroomTrigger : MonoBehaviour
         gameManagerObject = GameObject.Find("GameManager");
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
-        wrinkledSheets = GameObject.Find("WrinkledSheets").GetComponent<BoxCollider>();
+		messyBed = GameObject.Find("MessyBed").GetComponent<BoxCollider>();
     }
 
     void OnTriggerEnter(Collider other)
@@ -32,7 +32,7 @@ public class BedroomTrigger : MonoBehaviour
             {
                 //Debug.Log("Player in Bedroom!");
 
-                wrinkledSheets.enabled = true;
+				messyBed.enabled = true;
 
                 isActivated = true; // To prevent the OCD task playing everytime I enter the collider.
 

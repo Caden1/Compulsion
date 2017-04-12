@@ -7,7 +7,8 @@ public class PausedMenu : MonoBehaviour {
 	public GameObject PauseMenu;
 	// Use this for initialization
 	void Start () {
-		PauseMenu.SetActive (false);
+		GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = false;
+		//PauseMenu.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -16,8 +17,8 @@ public class PausedMenu : MonoBehaviour {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 			Time.timeScale =0;
-			PauseMenu.SetActive (true);
-			
+			GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = true;
+
 		}
 		
 	}
@@ -31,14 +32,15 @@ public class PausedMenu : MonoBehaviour {
 	}
 	public void OnRestartButtonClicked()
 	{
-		Application.LoadLevel (Application.loadedLevel);
+		Application.LoadLevel ("MainScene2");
 	}
 	public void OnResumeButtonClicked()
 	{
 		//Cursor.visible = false;
 		//Cursor.lockState = CursorLockMode.None;
 		Time.timeScale =1;
-		PauseMenu.SetActive (false);
+		GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = false;
+
 	}
 	public void OnExitButtonClicked()
 	{

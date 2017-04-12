@@ -9,7 +9,6 @@ public class WaterPlant : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
-		
 	}
 	
 	// Update is called once per frame
