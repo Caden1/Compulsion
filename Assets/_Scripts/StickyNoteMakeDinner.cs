@@ -48,14 +48,18 @@ public class StickyNoteMakeDinner : MonoBehaviour
 		forksandKnives.GetComponent<BoxCollider>().enabled = true;
 		cookies.GetComponent<BoxCollider>().enabled = true;
 		sandwhiches.GetComponent<BoxCollider>().enabled = true;
-		//kitchenTableColliderScript.MaybeDisableCollider(); // Decrements the static integer
-		kitchenTableCollider.GetComponent<BoxCollider> ().enabled = true;
+		kitchenTableColliderScript.MaybeDisableCollider(); // Decrements the static integer
 
-        //gameManagerObject.SendMessage("StartOCD", gameObject);
+		if (KitchenTableCollider.colliderEnabledCount == 0) // Only disable the box collider if no other task is using it.
+		{
+			kitchenTableCollider.GetComponent<BoxCollider>().enabled = false;
+		}
 
-        //cor2 = StartCoroutine(OCDActiveLength());
+        gameManagerObject.SendMessage("StartOCD", gameObject);
 
-        //cor = StartCoroutine(StartOCDTextPulse());
+        cor2 = StartCoroutine(OCDActiveLength());
+
+        cor = StartCoroutine(StartOCDTextPulse());
     }
 
     private IEnumerator OCDActiveLength()
@@ -76,7 +80,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
         floatingtext.Activate();
     }
 
-	/*
+
     public void CleanUp()
     {
         kitchenTableColliderScript.MaybeDisableCollider(); // Decrements the static integer
@@ -94,5 +98,5 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
         StopCoroutine(cor); // Stop the StartOCDTextPulse process
     }
-    */
+    
 }

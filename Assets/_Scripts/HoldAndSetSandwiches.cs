@@ -7,10 +7,12 @@ public class HoldAndSetSandwiches : MonoBehaviour
     public static bool twoSandwiches;
 	public static bool areSandwichesPlaced = false;
     private GameObject sandwichReference;
-
+	private KitchenTableCollider kitchenTableColliderScript;
     // Use this for initialization
     void Start()
     {
+		kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
+
 		areSandwichesPlaced = false;
 
         sandwichReference = GameObject.Find("2SandwichesPickUp"); // Need a reference to the original sandwiches.
@@ -18,6 +20,7 @@ public class HoldAndSetSandwiches : MonoBehaviour
 
     public void GrabThenSetDown()
     {
+		kitchenTableColliderScript.EnableCollider ();
         if (gameObject.name == "2SandwichesPickUp" && twoSandwiches == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);

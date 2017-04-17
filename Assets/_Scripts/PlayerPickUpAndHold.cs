@@ -11,9 +11,9 @@ public class PlayerPickUpAndHold : MonoBehaviour
 	public PopUpText tempObj;
 	int cnt = 0;
 
-    //private static bool readyToLerp;
+    private static bool readyToLerp;
 
-    //private GameObject objectHolding;
+    private GameObject objectHolding;
 
     // Use this for initialization
     void Start()
@@ -23,10 +23,10 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
         itemsCarried = 0;
 
-        //readyToLerp = false;
+        readyToLerp = false;
     }
 
-    /*
+    
     void Update()
     {
         if (readyToLerp == true)
@@ -36,7 +36,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
             //Debug.Log("Still Executing");
         }
     }
-    */
+    
 
     public void PickUpAndHold(GameObject objectToHold)
     {
@@ -52,12 +52,12 @@ public class PlayerPickUpAndHold : MonoBehaviour
 
             objectToHold.SendMessage("SetVarTrue", SendMessageOptions.DontRequireReceiver); // Set boolean in each script so you can set down items properly.
         }
-        /*
+        
         else
         {
             readyToLerp = false;
         }
-        */
+        
         //Debug.Log("Items Carried: " + itemsCarried);
     }
 

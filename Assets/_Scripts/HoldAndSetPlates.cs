@@ -8,10 +8,12 @@ public class HoldAndSetPlates : MonoBehaviour
     public static bool twoPlates;
     private GameObject plateReference;
 	public static bool setPlates;
+	private KitchenTableCollider kitchenTableColliderScript;
 
     // Use this for initialization
     void Start ()
     {
+		kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
 		setPlates = false;
         twoPlates = false;
 
@@ -20,6 +22,7 @@ public class HoldAndSetPlates : MonoBehaviour
 
     public void GrabThenSetDown()
     {
+		kitchenTableColliderScript.EnableCollider ();
         if (gameObject.name == "2PlatesPickup" && twoPlates == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);

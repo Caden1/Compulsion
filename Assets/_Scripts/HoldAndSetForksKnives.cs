@@ -7,10 +7,13 @@ public class HoldAndSetForksKnives : MonoBehaviour
     private static bool forkAndKnife;
     private GameObject forkAndKnifeReference;
 	public static bool FKSet;
-
+	private KitchenTableCollider kitchenTableColliderScript;
     // Use this for initialization
     void Start ()
     {
+
+		kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
+
 		FKSet = false;
 
         forkAndKnife = false;
@@ -20,6 +23,7 @@ public class HoldAndSetForksKnives : MonoBehaviour
 
     public void GrabThenSetDown()
     {
+		kitchenTableColliderScript.EnableCollider ();
         if (gameObject.name == "ForkKnifePickup" && forkAndKnife == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);

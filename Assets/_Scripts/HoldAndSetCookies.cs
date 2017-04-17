@@ -7,10 +7,13 @@ public class HoldAndSetCookies : MonoBehaviour
     public static bool cookedCookies;
 	public static bool areCookiesCooked;
     private GameObject cookedCookiesReference;
+	private KitchenTableCollider kitchenTableColliderScript;
 
     // Use this for initialization
     void Start()
     {
+		kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
+
         cookedCookies = false;
 
         cookedCookiesReference = GameObject.Find("CookedCookies"); // Need a reference to the original Cooked Cookies.
@@ -18,6 +21,8 @@ public class HoldAndSetCookies : MonoBehaviour
 
     public void GrabThenSetDown()
     {
+		kitchenTableColliderScript.EnableCollider(); // Increments the static integer and enables the collider.
+
         if (gameObject.name == "CookedCookies" && cookedCookies == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
