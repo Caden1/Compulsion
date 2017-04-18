@@ -26,8 +26,6 @@ public class StickyNoteMakeDinner : MonoBehaviour
     {
         gameManagerObject = GameObject.Find("GameManager");
         sponge = GameObject.Find("Sponge");
-		plates = GameObject.Find ("2PlatesPickup");
-		forksandKnives = GameObject.Find ("ForkKnifePickup");
 		cookies = GameObject.Find ("UncookedCookies");
 		sandwhiches = GameObject.Find ("2SandwichesPickUp");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
@@ -43,9 +41,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
         gameObject.GetComponent<BoxCollider>().enabled = false;
 
         // Enable box colliders needed.
-        sponge.GetComponent<BoxCollider>().enabled = true;
-		plates.GetComponent<BoxCollider>().enabled = true;
-		forksandKnives.GetComponent<BoxCollider>().enabled = true;
+		if (ScrubTableWithSponge.scrubTable == false) {
+			//Only enable the sponge collider if the table hasn't been scrubbed
+			sponge.GetComponent<BoxCollider> ().enabled = true;
+		}
 		cookies.GetComponent<BoxCollider>().enabled = true;
 		sandwhiches.GetComponent<BoxCollider>().enabled = true;
 		kitchenTableColliderScript.MaybeDisableCollider(); // Decrements the static integer

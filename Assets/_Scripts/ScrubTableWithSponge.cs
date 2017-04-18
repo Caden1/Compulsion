@@ -10,7 +10,7 @@ public class ScrubTableWithSponge : MonoBehaviour
 
     private static bool sponge;
     private Transform spongePosition;
-    private bool scrubTable;
+	public static bool scrubTable;
     private bool scrubLeftDir;
     private GameObject spongeReference;
     private Transform spongeReferencePosition;
@@ -98,6 +98,7 @@ public class ScrubTableWithSponge : MonoBehaviour
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;
             scrubTable = true;
+			//Debug.Log ("Scrub Table task bool: " + scrubTable);
         }
         
         else if (gameObject.name == "SpongeCollider" && scrubTable == false) // To put the sponge back by the sink

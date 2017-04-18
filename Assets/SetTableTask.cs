@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DinnerAndTableTask : MonoBehaviour {
+public class SetTableTask : MonoBehaviour {
+
 	private bool onetimeTaskCompletion;
 	private GameManager gameManagerScript;
 
@@ -17,11 +18,11 @@ public class DinnerAndTableTask : MonoBehaviour {
 	void Update () {
 		if(onetimeTaskCompletion == false)
 		{
-			if (HoldAndSetCookies.areCookiesCooked == true && HoldAndSetSandwiches.areSandwichesPlaced == true) {
+			if (HoldAndSetForksKnives.FKSet == true && HoldAndSetPlates.setPlates == true) {
 				gameManagerScript.NormalTaskCompleted ();
 				onetimeTaskCompletion = true;
 			}
-		
+
+		}
 	}
-}
 }
