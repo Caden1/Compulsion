@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Can be used for triggering events in the bathroom.
-/// So far it does:
-///     Flush toilet OCD task.
-/// </summary>
-public class BathroomTrigger : MonoBehaviour
+public class LivingRoomTrigger2 : MonoBehaviour
 {
     [HideInInspector]
     public bool isActivated; // Set to true when the OCD task is activated.
@@ -15,6 +10,9 @@ public class BathroomTrigger : MonoBehaviour
     private GameManager gameManagerScript;
     private Coroutine cor;
     private Coroutine cor2;
+    
+
+    private GameObject coffeeTableBooks;
 
     private FloatingText floatingtext;
 
@@ -27,6 +25,7 @@ public class BathroomTrigger : MonoBehaviour
         gameManagerObject = GameObject.Find("GameManager");
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+        coffeeTableBooks = GameObject.Find("BooksCoffeeTablePickUp");
     }
 
     private void PlaySound()
@@ -34,32 +33,24 @@ public class BathroomTrigger : MonoBehaviour
         gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
     }
 
-    void OnTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             if (isActivated == false)
             {
-                isActivated = true; // To prevent the OCD task playing everytime I exit the collider.
+                isActivated = true; // To prevent the OCD task playing everytime I enter the collider.
 
                 gameManagerObject.SendMessage("StartOCD", gameObject);
                 Invoke("PlaySound", 0.5f);
+
+                coffeeTableBooks.GetComponent<BoxCollider>().enabled = true;
 
                 cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
 
                 cor = StartCoroutine(StartOCDTextPulse());
             }
         }
-    }
-
-    /// <summary>
-    /// Allows this OCD effect to be triggered again.
-    /// </summary>
-    private IEnumerator ResetTimer()
-    {
-        yield return new WaitForSeconds(60f);
-
-        isActivated = false;
     }
 
     private IEnumerator OCDActiveLength()
@@ -85,8 +76,6 @@ public class BathroomTrigger : MonoBehaviour
         gameManagerObject.SendMessage("EndOCD", gameObject);
 
         StopCoroutine(cor2); // Stop the OCDActiveLength process
-
-        StartCoroutine(ResetTimer());
 
         floatingtext.Deactivate();
 

@@ -33,7 +33,7 @@ public class FloatingText : MonoBehaviour
     {
         if (mesh.enabled)
         {
-            self.LookAt(player);
+            self.LookAt(player.position + Vector3.up);
         }
     }
 

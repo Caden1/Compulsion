@@ -9,8 +9,6 @@ using UnityEngine;
 /// </summary>
 public class LivingRoomTrigger : MonoBehaviour
 {
-    [HideInInspector]
-    public bool isActivated; // Set to true when the OCD task is activated.
     private GameObject gameManagerObject;
     private GameManager gameManagerScript;
     private Coroutine cor;
@@ -18,40 +16,35 @@ public class LivingRoomTrigger : MonoBehaviour
 
     private FloatingText floatingtext;
 
+    public AudioClip clip;
+
 
     private void Start()
     {
-        isActivated = false;
         gameManagerObject = GameObject.Find("GameManager");
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+    }
+
+    private void PlaySound()
+    {
+        gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
     }
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (isActivated == false)
-            {
-                isActivated = true; // To prevent the OCD task playing everytime I exit the collider.
+            // Reset the TV counter to zero
+            TVOnAndOff.timesTurnedOnAndOff = 0;
 
-                gameManagerObject.SendMessage("StartOCD", gameObject);
+            gameManagerObject.SendMessage("StartOCD", gameObject);
+            Invoke("PlaySound", 0.5f);
 
-                cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
+            cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
 
-                cor = StartCoroutine(StartOCDTextPulse());
-            }
+            cor = StartCoroutine(StartOCDTextPulse());
         }
-    }
-
-    /// <summary>
-    /// Allows this OCD effect to be triggered again.
-    /// </summary>
-    private IEnumerator ResetTimer()
-    {
-        yield return new WaitForSeconds(60f);
-
-        isActivated = false;
     }
 
     private IEnumerator OCDActiveLength()
@@ -68,7 +61,7 @@ public class LivingRoomTrigger : MonoBehaviour
 
     private IEnumerator StartOCDTextPulse()
     {
-        yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+        yield return null;
         floatingtext.Activate();
     }
 
@@ -77,8 +70,6 @@ public class LivingRoomTrigger : MonoBehaviour
         gameManagerObject.SendMessage("EndOCD", gameObject);
 
         StopCoroutine(cor2); // Stop the OCDActiveLength process
-
-        StartCoroutine(ResetTimer());
 
         floatingtext.Deactivate();
 

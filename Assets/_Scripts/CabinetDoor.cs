@@ -55,27 +55,30 @@ public class CabinetDoor : MonoBehaviour {
         }
         else
         {
+            //GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.2f);
             target = open;
             cor2 = StartCoroutine(OCDTimer());
         }
 
-        cor = StartCoroutine("Swing");
         isOpen = !isOpen;
-        //play opening noise
-        if (isOpen)
-        {
-            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.2f);
-        }
+        cor = StartCoroutine("Swing");
+        
     }
 
     private IEnumerator Swing()
     {
+        if (isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.2f);
+        }
+
         Debug.Log(Quaternion.Angle(transform.rotation, target));
         while (Quaternion.Angle(transform.rotation, target) != 0)
         {
             parent.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
         }
+
         //Play closing noise
         if(!isOpen)
         {

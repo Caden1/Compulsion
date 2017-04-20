@@ -6,7 +6,7 @@ public class TVOnAndOff : MonoBehaviour
 {
     public int numberOfTimesNeeded = 3; // Number needed to stop OCD
 
-    private static int timesTurnedOnAndOff;
+    public static int timesTurnedOnAndOff;
     private static bool isOn;
     private LivingRoomTrigger livingRoomTriggerScript;
 

@@ -14,6 +14,7 @@ public class BedroomTrigger : MonoBehaviour
 
     private FloatingText floatingtext;
 
+    public AudioClip clip;
 
     private void Start()
     {
@@ -37,12 +38,18 @@ public class BedroomTrigger : MonoBehaviour
                 isActivated = true; // To prevent the OCD task playing everytime I enter the collider.
 
                 gameManagerObject.SendMessage("StartOCD", gameObject);
+                Invoke("PlaySound", 5f);
 
                 cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
 
                 cor = StartCoroutine(StartOCDTextPulse());
             }
         }
+    }
+
+    private void PlaySound()
+    {
+        gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
     }
 
     private IEnumerator OCDActiveLength()

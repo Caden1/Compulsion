@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         taskCompleteCount = 0;
         ocdCurrentCount = 0;
         startTime = Time.time;
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("MouthAudioSource");
         playerSoundSource = player.GetComponent<AudioSource>();
         queuedSounds = new Queue<AudioClip>();
         activeOCD = new Dictionary<GameObject, OCDTask>();
@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
             lock (soundLock) { sound = queuedSounds.Dequeue(); }
 
             playerSoundSource.PlayOneShot(sound);
-            yield return new WaitForSeconds(sound.length);
+            yield return new WaitForSeconds(sound.length + 1f);
 
             lock (soundLock) { shouldContinue = queuedSounds.Count != 0; }
         }

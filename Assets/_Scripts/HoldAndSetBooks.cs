@@ -7,7 +7,7 @@ public class HoldAndSetBooks : MonoBehaviour
     public static bool coffeeTableBooks;
     private GameObject coffeeTableBooksReference;
     private BoxCollider booksCoffeeTablePlaceCollider;
-    private StickyNoteWaterPlants stickyNoteWaterPlantsScript;
+    private LivingRoomTrigger2 livingRoomTrigger2Script;
 
     // Use this for initialization
     void Start()
@@ -16,7 +16,7 @@ public class HoldAndSetBooks : MonoBehaviour
 
         coffeeTableBooksReference = GameObject.Find("BooksCoffeeTablePickUp"); // Need a reference to the original coffee table books.
         booksCoffeeTablePlaceCollider = GameObject.Find("BooksCoffeeTablePlace").GetComponent<BoxCollider>();
-        stickyNoteWaterPlantsScript = GameObject.Find("StickyNoteWaterPlants").GetComponent<StickyNoteWaterPlants>();
+        livingRoomTrigger2Script = GameObject.Find("LivingRoomTrigger2").GetComponent<LivingRoomTrigger2>();
     }
 
     public void GrabThenSetDown()
@@ -43,7 +43,7 @@ public class HoldAndSetBooks : MonoBehaviour
 
             booksCoffeeTablePlaceCollider.enabled = false; // Disable the placement box collider.
 
-            stickyNoteWaterPlantsScript.CleanUp();
+            livingRoomTrigger2Script.CleanUp();
         }
     }
 

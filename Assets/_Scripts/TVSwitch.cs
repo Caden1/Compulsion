@@ -13,6 +13,8 @@ public class TVSwitch : MonoBehaviour {
 
     public LayerMask mask;
 
+    private Collider livingRoomTrigger;
+
     private void Start()
     {
         tv = ((MovieTexture)GetComponent<Renderer>().material.mainTexture);
@@ -21,6 +23,9 @@ public class TVSwitch : MonoBehaviour {
         render = GetComponent<MeshRenderer>();
         tv.loop = true;
         player = GameObject.Find("Player").transform;
+
+        livingRoomTrigger = GameObject.Find("LivingRoomTrigger").GetComponent<Collider>();
+        livingRoomTrigger.enabled = false;
     }
 
     private void Update()
@@ -47,12 +52,16 @@ public class TVSwitch : MonoBehaviour {
     {
         if (isOn)
         {
+            livingRoomTrigger.enabled = false;
+
             tv.Stop();
             audio.Stop();
             render.enabled = false;
         }
         else
         {
+            livingRoomTrigger.enabled = true;
+
             render.enabled = true;
             tv.Play();
             audio.Play();
