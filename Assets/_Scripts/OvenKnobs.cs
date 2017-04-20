@@ -16,6 +16,11 @@ public class OvenKnobs : MonoBehaviour
     private Quaternion off;
     private Quaternion target;
     private Coroutine cor;
+	public AudioClip clip1;
+	public AudioClip clip2;
+	public AudioClip clip3;
+	public AudioClip clip4;
+	private GameObject gameManagerObject;
 
 
     // Use this for initialization
@@ -27,6 +32,7 @@ public class OvenKnobs : MonoBehaviour
         target = off;
 
 		startOvenKnobOCDScript = GameObject.Find("StartOvenKnobOCD").GetComponent<StartOvenKnobOCD>();
+		gameManagerObject = GameObject.Find("GameManager");
     }
 
     public void Activate()
@@ -44,10 +50,38 @@ public class OvenKnobs : MonoBehaviour
 
 		if (startOvenKnobOCDScript.isActivated == true) 
 		{
-			if (knobSet.ContainsKey (gameObject.name))
+			if (knobSet.ContainsKey (gameObject.name)) 
+			{
 				knobSet [gameObject.name] = !knobSet [gameObject.name];
-			else
+
+				if (!isOn) {
+					int count = 0;
+
+					foreach (bool b in knobSet.Values) {
+						if (b == false)
+							count++;
+					}
+
+					switch (count) {
+					case 1: 
+						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip1);
+						break;
+					case 2:
+						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip2);
+						break;
+					case 3:
+						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip3);
+						break;
+					case 4:
+						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip4);
+						break;
+					}
+				}
+			} 
+			else 
+			{
 				knobSet.Add (gameObject.name, isOn);
+			}
 			
 			if (knobSet.Count == 4) 
 			{

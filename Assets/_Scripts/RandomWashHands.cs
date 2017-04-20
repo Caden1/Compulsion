@@ -8,16 +8,28 @@ public class RandomWashHands : MonoBehaviour
 	private Coroutine cor;
 	private Coroutine cor2;
 	private FloatingText floatingtext;
+	private bool textIsActive;
+	public AudioClip clip;
+
+
+	public bool Text
+	{
+		get
+		{
+			return textIsActive;
+		}
+	}
 
 	private void Start()
 	{
 		gameManagerObject = GameObject.Find("GameManager");
 		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		textIsActive = false;
 	}
 
 	public void Activate()
 	{
-        Debug.Log("Random Wash Hands Activated!");
+		Invoke("PlaySound", 15f);
 
 		cor2 = StartCoroutine(OCDActiveLength());
 
@@ -31,8 +43,14 @@ public class RandomWashHands : MonoBehaviour
         StopCoroutine(cor2); // Stop the OCDActiveLength process
 
 		floatingtext.Deactivate();
+		textIsActive = false;
 
 		StopCoroutine(cor); // Stop the StartOCDTextPulse process
+	}
+
+	private void PlaySound()
+	{
+		gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
 	}
 
 	private IEnumerator OCDActiveLength()
@@ -49,7 +67,8 @@ public class RandomWashHands : MonoBehaviour
 
 	private IEnumerator StartOCDTextPulse()
 	{
-		yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+		yield return new WaitForSeconds(16f); // Waits 16 seconds before initial start.
 		floatingtext.Activate();
+		textIsActive = true;
 	}
 }

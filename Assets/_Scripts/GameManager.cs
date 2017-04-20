@@ -234,7 +234,7 @@ public class GameManager : MonoBehaviour
             lock (soundLock) { sound = queuedSounds.Dequeue(); }
 
             playerSoundSource.PlayOneShot(sound);
-            yield return new WaitForSeconds(sound.length + 1f);
+            yield return new WaitForSeconds(sound.length + 0.1f);
 
             lock (soundLock) { shouldContinue = queuedSounds.Count != 0; }
         }

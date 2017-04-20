@@ -11,8 +11,8 @@ public class StartOvenKnobOCD : MonoBehaviour
 	private GameManager gameManagerScript;
 	private Coroutine cor;
 	private Coroutine cor2;
-
 	private FloatingText floatingtext;
+	public AudioClip clip;
 
 	private void Start()
 	{
@@ -31,12 +31,18 @@ public class StartOvenKnobOCD : MonoBehaviour
 				isActivated = true; // To prevent the OCD task playing everytime I exit the collider.
 
 				gameManagerObject.SendMessage("StartOCD", gameObject);
+				Invoke("PlaySound", 1f);
 
 				cor2 = StartCoroutine(OCDActiveLength()); // Start the OCDActiveLength process
 
 				cor = StartCoroutine(StartOCDTextPulse());
 			}
 		}
+	}
+
+	private void PlaySound()
+	{
+		gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
 	}
 
 	/// <summary>
@@ -63,7 +69,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 
 	private IEnumerator StartOCDTextPulse()
 	{
-		yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+		yield return new WaitForSeconds(2f); // Waits 10 seconds before initial start.
 		floatingtext.Activate();
 	}
 

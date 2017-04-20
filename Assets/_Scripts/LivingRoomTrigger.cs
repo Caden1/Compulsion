@@ -13,17 +13,24 @@ public class LivingRoomTrigger : MonoBehaviour
     private GameManager gameManagerScript;
     private Coroutine cor;
     private Coroutine cor2;
-
     private FloatingText floatingtext;
-
     public AudioClip clip;
+	private bool textIsActive;
 
+	public bool Text
+	{
+		get
+		{
+			return textIsActive;
+		}
+	}
 
     private void Start()
     {
         gameManagerObject = GameObject.Find("GameManager");
         gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
         floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		textIsActive = false;
     }
 
     private void PlaySound()
@@ -63,6 +70,7 @@ public class LivingRoomTrigger : MonoBehaviour
     {
         yield return null;
         floatingtext.Activate();
+		textIsActive = true;
     }
 
     public void CleanUp()
@@ -72,6 +80,7 @@ public class LivingRoomTrigger : MonoBehaviour
         StopCoroutine(cor2); // Stop the OCDActiveLength process
 
         floatingtext.Deactivate();
+		textIsActive = false;
 
         StopCoroutine(cor); // Stop the StartOCDTextPulse process
     }

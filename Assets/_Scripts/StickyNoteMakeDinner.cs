@@ -22,6 +22,8 @@ public class StickyNoteMakeDinner : MonoBehaviour
     private FloatingText floatingtext;
 	private FloatingText Everyday1text;
 
+	public AudioClip clip;
+
     // Use this for initialization
     void Start()
     {
@@ -31,7 +33,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 		sandwhiches = GameObject.Find ("2SandwichesPickUp");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
-		Everyday1text =  GameObject.Find("TempText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		//Everyday1text =  GameObject.Find("TempText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
 		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
 
@@ -44,7 +46,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 		*/
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
-		Everyday1text.Activate ();
+		//Everyday1text.Activate ();
         // Enable box colliders needed.
 
 		if (ScrubTableWithSponge.scrubTable == false) {
@@ -61,11 +63,17 @@ public class StickyNoteMakeDinner : MonoBehaviour
 		}
 
         gameManagerObject.SendMessage("StartOCD", gameObject);
+		Invoke("PlaySound", 4f);
 
         cor2 = StartCoroutine(OCDActiveLength());
 
         cor = StartCoroutine(StartOCDTextPulse());
     }
+
+	private void PlaySound()
+	{
+		gameManagerObject.SendMessage("QueuePlayerSpeech", clip);
+	}
 
     private IEnumerator OCDActiveLength()
     {
@@ -81,7 +89,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
     private IEnumerator StartOCDTextPulse()
     {
-        yield return new WaitForSeconds(10f); // Waits 10 seconds before initial start. Match this with starting IncreaseInfluence
+        yield return new WaitForSeconds(4.5f); // Waits 4 seconds before initial start.
         floatingtext.Activate();
     }
 
