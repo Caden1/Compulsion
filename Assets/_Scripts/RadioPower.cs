@@ -6,8 +6,8 @@ public class RadioPower : MonoBehaviour
 {
 
     public float speed = 1f;
-    private enum FaceDirection { POSX, NEGX, POSZ, NEGZ }
-    [SerializeField] private FaceDirection facing = FaceDirection.POSX;
+    public enum FaceDirection { POSX, NEGX, POSZ, NEGZ }
+    public FaceDirection facing = FaceDirection.POSX;
     public AudioClip[] music;
 
     private bool isOn;
@@ -19,13 +19,17 @@ public class RadioPower : MonoBehaviour
     private GameObject gameManager;
     private AudioSource speaker;
     private int clipNumber;
+    private bool oneTime;
+    private GameObject stickyNote;
 
 
     // Use this for initialization
     private void Start()
     {
         isOn = false;
+        oneTime = false;
         off = transform.position;
+        stickyNote = GameObject.Find("RadioStickyNote");
         switch (facing)
         {
             case FaceDirection.POSX:
@@ -52,6 +56,9 @@ public class RadioPower : MonoBehaviour
 
     public void Activate()
     {
+        if (!oneTime)
+            stickyNote.SendMessage("CleanUp");
+
         if (cor != null)
             StopCoroutine(cor);
 
@@ -69,11 +76,6 @@ public class RadioPower : MonoBehaviour
         isOn = !isOn;
     }
 
-    public bool isTurnedOn()
-    {
-        return isOn;
-    }
-
     public void ChangeStation()
     {
         if (isOn)
@@ -85,9 +87,13 @@ public class RadioPower : MonoBehaviour
 
             speaker.Stop();
             speaker.clip = speaker.clip = music[clipNumber++];
-            Invoke("speaker.Play()", 0.1f);
-        }
+            
+            Invoke("RestartMusic", 0.1f);
+        }      
+    }
 
-        
+    public void RestartMusic()
+    {
+        speaker.Play();
     }
 }
