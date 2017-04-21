@@ -12,19 +12,15 @@ public class WaterPlant : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		if ( Input.GetMouseButtonDown (0) )
-		{
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast( Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 1000) && (!(hit.rigidbody==null) || !(hit.collider==null)))
-			{
-				if(hit.collider.gameObject.name == "WeedPlant")
-				{
+	void Activate()  {
+		
+				
 					gameObject.GetComponent<BoxCollider> ().enabled = false;
 					gameManagerScript.NormalTaskCompleted ();
-				}
+				
 			}
 		}
-		
-	}
-}
+
+
+	
+
