@@ -27,15 +27,16 @@ public class HoldAndSetForksKnives : MonoBehaviour
         if (gameObject.name == "ForkKnifePickup" && forkAndKnife == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
+            GetComponent<GenericPlaySound>().PlayGivenSoundRandomPitch(0, .5f);
         }
         else if (gameObject.name == "KitchenTableCollider" && forkAndKnife == true)
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-
             Destroy(forkAndKnifeReference); // Destroy the original forks and knives.
 
             // Specail cases becasue the children for fork and knife start at index 2
             gameObject.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = true;
+            gameObject.transform.GetChild(2).GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.3f); // plays the sound for placing the silverware
             gameObject.transform.GetChild(3).GetComponent<MeshRenderer>().enabled = true;
             gameObject.transform.GetChild(4).GetComponent<MeshRenderer>().enabled = true;
             gameObject.transform.GetChild(5).GetComponent<MeshRenderer>().enabled = true;

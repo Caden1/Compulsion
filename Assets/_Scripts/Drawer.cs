@@ -56,7 +56,7 @@ public class Drawer : MonoBehaviour {
             target = open;
             cor2 = StartCoroutine(OCDTimer());
         }
-        this.GetComponent<GenericPlaySound>().PlaySoundRandomPitch(1f);
+        this.GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.3f);
         cor = StartCoroutine("Move");
         isOpen = !isOpen;
     }

@@ -36,6 +36,10 @@ public class FlushToilet : MonoBehaviour
 
     private IEnumerator Swing()
     {
+        if(!isFlushable)
+        {
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.6f);
+        }
         while (true)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, down, Time.deltaTime * speed);

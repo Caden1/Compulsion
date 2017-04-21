@@ -10,7 +10,7 @@ public class WashHands : MonoBehaviour
     private OCDEffectManager blur;
     public AudioClip washingHands;
     public float washingHandsVolume = 0.5f;
-    private AudioSource audio;
+    public AudioSource audio;
 	private RandomWashHands randomWashHandsScript;
 	private RigidbodyFirstPersonController rigidbodyFirstPersonControllerScript;
 
@@ -20,7 +20,7 @@ public class WashHands : MonoBehaviour
         GameObject sinkKnob = GameObject.Find("SinkKnob");
         sinkKnobScript = sinkKnob.GetComponent<SinkKnob>();
         stopWashingHands = false;
-        audio = GetComponent<AudioSource>();
+        //audio = GetComponent<AudioSource>();
 		randomWashHandsScript = GameObject.Find("RandomWashHands").GetComponent<RandomWashHands>();
 		rigidbodyFirstPersonControllerScript = GameObject.Find("Player").GetComponent<RigidbodyFirstPersonController>();
     }

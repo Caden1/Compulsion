@@ -45,8 +45,9 @@ public class OvenKnobs : MonoBehaviour
         else
             target = on;
 
-        cor = StartCoroutine("Swing");
         isOn = !isOn;
+        cor = StartCoroutine("Swing");
+ 
 
 		if (startOvenKnobOCDScript.isActivated == true) 
 		{
@@ -106,6 +107,10 @@ public class OvenKnobs : MonoBehaviour
 
     private IEnumerator Swing()
     {
+        if (isOn)
+        {
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch();
+        }
         //Debug.Log(Quaternion.Angle(transform.rotation, target));
         while (Quaternion.Angle(transform.rotation, target) != 0)
         {

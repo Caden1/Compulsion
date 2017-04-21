@@ -19,7 +19,7 @@ public class LightSwitch : MonoBehaviour {
             lever.Rotate(Vector3.up * -20f);
         else
             lever.Rotate(Vector3.up * 20f);
-
+        GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.1f); // Play sound for light switch
         isOn = !isOn;
         foreach (Light light in lights)
         {

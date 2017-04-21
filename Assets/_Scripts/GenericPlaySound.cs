@@ -30,4 +30,15 @@ public class GenericPlaySound : MonoBehaviour {
         source.pitch = Random.Range(.9f, 1.1f);
         source.PlayOneShot(clip[i], volume);
     }
+    public void PlaySoundLoop(float volume = .7f)
+    {
+        source.loop = true;
+        source.clip = clip[0];
+        source.volume = volume;
+        source.Play();
+    }
+    public void StopSoundLoop()
+    {
+        source.Stop();
+    }
 }

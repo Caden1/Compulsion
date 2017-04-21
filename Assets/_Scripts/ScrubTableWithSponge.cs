@@ -46,6 +46,7 @@ public class ScrubTableWithSponge : MonoBehaviour
             {
                 spongePosition.position = Vector3.Lerp(spongePosition.position,
                     new Vector3(spongePosition.position.x + 0.8f, spongePosition.position.y, spongePosition.position.z - 1.5f), Time.deltaTime * 2.0f);
+                spongePosition.GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.1f); // Play scrub noise
 
                 Invoke("ReverseScrubDirection", 0.25f);
             }
@@ -62,7 +63,6 @@ public class ScrubTableWithSponge : MonoBehaviour
     private void ReverseScrubDirection()
     {
         scrubLeftDir = false;
-
         Invoke("ReverseScrubDirection2", 0.25f);
     }
 

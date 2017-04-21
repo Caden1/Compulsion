@@ -13,12 +13,6 @@ public class EarRingingSound : MonoBehaviour
         source = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PlayEarRinging(float vol)
     {
         source.volume = vol;
@@ -28,6 +22,6 @@ public class EarRingingSound : MonoBehaviour
     public void StopEarRinging()
     {
         source.Stop();
-        source.volume = 0.3f;
+        source.volume = 1f;
     }
 }

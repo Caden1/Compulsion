@@ -18,7 +18,7 @@ public class MakeBed : MonoBehaviour
 	public void Activate()
     {
         Destroy(gameObject);
-
+        normalBed.GetComponent<GenericPlaySound>().PlaySoundRandomPitch(1f);
 		normalBed.GetComponent<MeshRenderer> ().enabled = true;
 
         bedroomTriggerScript.CleanUp();

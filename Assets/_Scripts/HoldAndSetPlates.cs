@@ -26,6 +26,7 @@ public class HoldAndSetPlates : MonoBehaviour
         if (gameObject.name == "2PlatesPickup" && twoPlates == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
+            GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.3f);
         }
         else if (gameObject.name == "KitchenTableCollider" && twoPlates == true)
         {
@@ -33,6 +34,7 @@ public class HoldAndSetPlates : MonoBehaviour
 
             Destroy(plateReference); // Destroy the original plates.
             gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+            gameObject.transform.GetChild(0).GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.3f); //plays the sound for placing the plates
             gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
             twoPlates = false;
 			/*This is called when the plates are put on the counter after the sponge is used, and this

@@ -60,17 +60,28 @@ public class OvenDoor : MonoBehaviour {
             cor2 = StartCoroutine(OCDTimer());
         }
 
-        cor = StartCoroutine("Swing");
         isOpen = !isOpen;
+        cor = StartCoroutine("Swing");
+
     }
 
     private IEnumerator Swing()
     {
+        //open sound
+        if (isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlayGivenSoundRandomPitch(0);
+        }
         Debug.Log(Quaternion.Angle(transform.rotation, target));
         while (Quaternion.Angle(transform.rotation, target) != 0)
         {
             transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * speed);
             yield return null;
+        }
+        //close sound
+        if (!isOpen)
+        {
+            GetComponent<GenericPlaySound>().PlayGivenSoundRandomPitch(1,1);
         }
     }
 

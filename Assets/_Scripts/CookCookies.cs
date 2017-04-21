@@ -15,9 +15,9 @@ public class CookCookies : MonoBehaviour
 
     private OvenDoor ovenDoorScript;
 
-    public AudioClip foodDone;
+    //public AudioClip foodDone;
     public float foodDoneVolume = 0.5f;
-    private AudioSource audio;
+   // private AudioSource audio;
 
     public float cookTime = 10.0f;
 
@@ -35,7 +35,7 @@ public class CookCookies : MonoBehaviour
         GameObject ovenDoor = GameObject.Find("OvenDoor");
         ovenDoorScript = ovenDoor.GetComponent<OvenDoor>();
 
-        audio = GetComponent<AudioSource>();
+      //  audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -61,6 +61,7 @@ public class CookCookies : MonoBehaviour
             uncookedCookiesReference.transform.position = putInOvenPosition.position + new Vector3(-0.4f, -0.05f, 0f); // New position of the uncooked cookies. (in th oven). Needed an offset added to it.
             uncookedCookiesReference.transform.parent = putInOvenPosition; // Child the uncooked cookies to the collider so the player lets go of it.
             uncookedCookiesReference.name = "PlacedUncookedCookies"; // Rename the object so it cannot be picked up again right away.
+            uncookedCookiesReference.transform.GetComponent<GenericPlaySound>().PlaySoundRandomPitch();
 
             uncookedCookies = false;
 
@@ -80,7 +81,7 @@ public class CookCookies : MonoBehaviour
         {
             cookedCookiesReference.GetComponent<MeshRenderer>().enabled = true;
             cookedCookiesReference.GetComponent<BoxCollider>().enabled = true;
-            audio.PlayOneShot(foodDone, foodDoneVolume);
+            cookedCookiesReference.GetComponent<GenericPlaySound>().PlaySoundRandomPitch();
             //Debug.Log(gameObject.name);
             Destroy(uncookedCookiesReference);
         }

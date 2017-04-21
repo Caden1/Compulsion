@@ -92,9 +92,11 @@ public class SinkKnob : MonoBehaviour {
 
 		if (isOpen) {
 			water.Play ();
+            GetComponent<GenericPlaySound>().PlaySoundLoop(.5f);
 		}
 		else {
 			water.Stop ();
+            GetComponent<GenericPlaySound>().StopSoundLoop();
 			//if (MDT.OCDTasksActivated == true) {
 			//	Debug.Log ("Hands have been washed, delete this shitty text");
 			//	GameObject.FindGameObjectWithTag ("OCDWash").GetComponent<Text> ().enabled = false;
