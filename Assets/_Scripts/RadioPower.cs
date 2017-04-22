@@ -16,7 +16,7 @@ public class RadioPower : MonoBehaviour
     private Vector3 target;
     private Coroutine cor;
     private Coroutine cor2;
-    private GameObject gameManager;
+	private GameManager gameManager;
     private AudioSource speaker;
     private int clipNumber;
     private bool oneTime;
@@ -46,7 +46,7 @@ public class RadioPower : MonoBehaviour
                 break;
         }
             
-        gameManager = GameObject.Find("GameManager");
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
         speaker = GetComponent<AudioSource>();
         speaker.volume = 0;
         clipNumber = 0;
@@ -56,7 +56,9 @@ public class RadioPower : MonoBehaviour
 
     public void Activate()
     {
+		//Debug.Log ("Music Playing!");
         if (!oneTime)
+			gameManager.NormalTaskCompleted();
             stickyNote.SendMessage("CleanUp");
 
         if (cor != null)
