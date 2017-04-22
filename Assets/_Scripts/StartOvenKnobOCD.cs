@@ -13,6 +13,16 @@ public class StartOvenKnobOCD : MonoBehaviour
 	private Coroutine cor2;
 	private FloatingText floatingtext;
 	public AudioClip clip;
+	private bool textIsActive;
+
+
+	public bool Text
+	{
+		get
+		{
+			return textIsActive;
+		}
+	}
 
 	private void Start()
 	{
@@ -20,6 +30,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 		gameManagerObject = GameObject.Find("GameManager");
 		gameManagerScript = GameObject.Find ("GameManager").GetComponent<GameManager>();
 		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		textIsActive = false;
 	}
 
 	void OnTriggerExit(Collider other)
@@ -71,6 +82,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 	{
 		yield return new WaitForSeconds(2f); // Waits 10 seconds before initial start.
 		floatingtext.Activate();
+		textIsActive = true;
 	}
 
 	public void CleanUp()
@@ -82,6 +94,7 @@ public class StartOvenKnobOCD : MonoBehaviour
 		StartCoroutine(ResetTimer());
 
 		floatingtext.Deactivate();
+		textIsActive = false;
 
 		StopCoroutine(cor); // Stop the StartOCDTextPulse process
 	}

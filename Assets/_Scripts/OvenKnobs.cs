@@ -55,27 +55,33 @@ public class OvenKnobs : MonoBehaviour
 			{
 				knobSet [gameObject.name] = !knobSet [gameObject.name];
 
-				if (!isOn) {
-					int count = 0;
+				if (startOvenKnobOCDScript.Text == true) 
+				{
+					if (!isOn) 
+					{
+						int count = 0;
 
-					foreach (bool b in knobSet.Values) {
-						if (b == false)
-							count++;
-					}
+						foreach (bool b in knobSet.Values) 
+						{
+							if (b == false)
+								count++;
+						}
 
-					switch (count) {
-					case 1: 
-						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip1);
-						break;
-					case 2:
-						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip2);
-						break;
-					case 3:
-						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip3);
-						break;
-					case 4:
-						gameManagerObject.SendMessage ("QueuePlayerSpeech", clip4);
-						break;
+						switch (count) 
+						{
+						case 1: 
+							gameManagerObject.SendMessage ("QueuePlayerSpeech", clip1);
+							break;
+						case 2:
+							gameManagerObject.SendMessage ("QueuePlayerSpeech", clip2);
+							break;
+						case 3:
+							gameManagerObject.SendMessage ("QueuePlayerSpeech", clip3);
+							break;
+						case 4:
+							gameManagerObject.SendMessage ("QueuePlayerSpeech", clip4);
+							break;
+						}
 					}
 				}
 			} 
