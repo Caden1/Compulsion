@@ -46,7 +46,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
 
 		//gameObject.GetComponent<BoxCollider>().enabled = false;
-		//Everyday1text.Activate ();
+		Everyday1text.Activate ();
         // Enable box colliders needed.
 
 		if (ScrubTableWithSponge.scrubTable == false) {
