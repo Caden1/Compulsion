@@ -54,6 +54,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
 		if (ScrubTableWithSponge.scrubTable == false) {
 			//Only enable the sponge collider if the table hasn't been scrubbed
+			sponge.GetComponent<MeshRenderer>().enabled = true;
 			sponge.GetComponent<BoxCollider> ().enabled = true;
 		}
 		cookies.GetComponent<BoxCollider>().enabled = true;

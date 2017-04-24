@@ -23,7 +23,7 @@ public class SetTableTask : MonoBehaviour {
 		{
 			
 			if (HoldAndSetForksKnives.FKSet == true && HoldAndSetPlates.setPlates == true) {
-				text.GetComponent<MeshCollider> ().enabled = false;
+				text.GetComponent<MeshRenderer> ().enabled = false;
 				stickyNote.GetComponent<MeshRenderer> ().enabled = false;
 				gameManagerScript.NormalTaskCompleted ();
 				onetimeTaskCompletion = true;

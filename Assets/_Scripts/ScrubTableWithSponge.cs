@@ -76,7 +76,7 @@ public class ScrubTableWithSponge : MonoBehaviour
         scrubTable = false;
 		rigidbodyFirstPersonControllerScript.enabled = true; // Can move agian
         spongePosition.GetComponent<MeshRenderer>().enabled = false;
-        newSpongeAfterScrubbing.transform.GetComponent<MeshRenderer>().enabled = true;
+		newSpongeAfterScrubbing.transform.GetComponent<MeshRenderer>().enabled = false;
 
         stickyNoteMakeDinnerScript.CleanUp();
     }
@@ -93,7 +93,7 @@ public class ScrubTableWithSponge : MonoBehaviour
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
             //Debug.Log ("Table has been scrubbed");
-            Destroy(spongeReference);
+			Destroy(spongeReference);
             spongeReference.transform.GetComponent<MeshRenderer>().enabled = false;
             gameObject.transform.GetChild(6).GetComponent<MeshRenderer>().enabled = true;
             sponge = false;

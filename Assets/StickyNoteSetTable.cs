@@ -39,6 +39,7 @@ public class StickyNoteSetTable : MonoBehaviour {
 		// Enable box colliders needed.
 		if (ScrubTableWithSponge.scrubTable == false) {
 			//Only enable the sponge collider if the table hasn't been scrubbed
+			sponge.GetComponent<MeshRenderer>().enabled = true;
 			sponge.GetComponent<BoxCollider> ().enabled = true;
 		}		
 		plates.GetComponent<BoxCollider>().enabled = true;
