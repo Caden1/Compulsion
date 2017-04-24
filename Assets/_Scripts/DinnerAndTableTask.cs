@@ -22,7 +22,7 @@ public class DinnerAndTableTask : MonoBehaviour {
 		if(onetimeTaskCompletion == false)
 		{
 			if (HoldAndSetCookies.areCookiesCooked == true && HoldAndSetSandwiches.areSandwichesPlaced == true) {
-				Everyday1task.GetComponent<MeshRenderer>().enabled = true;
+				Everyday1task.GetComponent<MeshRenderer>().enabled = false;
 				StickyNoteMakeDinner.GetComponent<MeshRenderer> ().enabled = false;
 				gameManagerScript.NormalTaskCompleted ();
 				onetimeTaskCompletion = true;

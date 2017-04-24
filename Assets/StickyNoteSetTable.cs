@@ -20,7 +20,7 @@ public class StickyNoteSetTable : MonoBehaviour {
 	{
 		text = GameObject.Find ("CheckTableText");
 		gameManagerObject = GameObject.Find("GameManager");
-		sponge = GameObject.Find("Sponge");
+		//sponge = GameObject.Find("Sponge");
 		plates = GameObject.Find ("2PlatesPickup");
 		forksandKnives = GameObject.Find ("ForkKnifePickup");
 		kitchenTableCollider = GameObject.Find("KitchenTableCollider");
@@ -37,11 +37,11 @@ public class StickyNoteSetTable : MonoBehaviour {
 		gameObject.GetComponent<MeshRenderer> ().material = Red;
 
 		// Enable box colliders needed.
-		if (ScrubTableWithSponge.scrubTable == false) {
+		/*if (ScrubTableWithSponge.scrubTable == false) {
 			//Only enable the sponge collider if the table hasn't been scrubbed
 			sponge.GetComponent<MeshRenderer>().enabled = true;
 			sponge.GetComponent<BoxCollider> ().enabled = true;
-		}		
+		}*/		
 		plates.GetComponent<BoxCollider>().enabled = true;
 		forksandKnives.GetComponent<BoxCollider>().enabled = true;
 		kitchenTableColliderScript.MaybeDisableCollider(); // Decrements the static integer
