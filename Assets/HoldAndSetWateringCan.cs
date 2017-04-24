@@ -7,8 +7,8 @@ public class HoldAndSetWateringCan : MonoBehaviour {
 	public static bool water;
 	private GameObject WateringCanRef;
 	private GameObject weedPlant;
-	private BoxCollider booksCoffeeTablePlaceCollider;
-	private LivingRoomTrigger2 livingRoomTrigger2Script;
+	//private BoxCollider booksCoffeeTablePlaceCollider;
+	//private LivingRoomTrigger2 livingRoomTrigger2Script;
 
 	// Use this for initialization
 	void Start()
@@ -17,8 +17,8 @@ public class HoldAndSetWateringCan : MonoBehaviour {
 
 		weedPlant = GameObject.Find ("WeedPlant");
 		WateringCanRef = GameObject.Find("wateringCan"); // Need a reference to the original coffee table books.
-		booksCoffeeTablePlaceCollider = GameObject.Find("BooksCoffeeTablePlace").GetComponent<BoxCollider>();
-		livingRoomTrigger2Script = GameObject.Find("LivingRoomTrigger2").GetComponent<LivingRoomTrigger2>();
+		//booksCoffeeTablePlaceCollider = GameObject.Find("BooksCoffeeTablePlace").GetComponent<BoxCollider>();
+		//livingRoomTrigger2Script = GameObject.Find("LivingRoomTrigger2").GetComponent<LivingRoomTrigger2>();
 	}
 
 	public void GrabThenSetDown()
@@ -29,11 +29,12 @@ public class HoldAndSetWateringCan : MonoBehaviour {
 			WateringCanRef.GetComponent<BoxCollider> ().enabled = false;
 			//WateringCanRef.transform.rotation = Quaternion.Euler (-30, 33, transform.rotation.z);
 			SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
-			GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.4f); // Play sound for picking up books
-			booksCoffeeTablePlaceCollider.enabled = true; // Enable the placement box collider.
+			SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
+			//GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.4f); // Play sound for picking up books
+			//booksCoffeeTablePlaceCollider.enabled = true; // Enable the placement box collider.
 			//Debug.Log ("Here!");
 		}
-		else if (gameObject.name == "BooksCoffeeTablePlace" && water == true)
+	/*	else if (gameObject.name == "BooksCoffeeTablePlace" && water == true)
 		{
 			//Debug.Log ("Here!!!");
 			SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
@@ -50,7 +51,7 @@ public class HoldAndSetWateringCan : MonoBehaviour {
 			booksCoffeeTablePlaceCollider.enabled = false; // Disable the placement box collider.
 
 			livingRoomTrigger2Script.CleanUp();
-		}
+		}*/
 	}
 
 	public void SetVarTrue()

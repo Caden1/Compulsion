@@ -10,14 +10,15 @@ public class StickyNoteWaterPlants : MonoBehaviour
 	private GameObject wateringCan;
     private Coroutine cor;
     private Coroutine cor2;
-	private FloatingText text;
+	private GameObject text;
+	public Material red;
 
     //private FloatingText floatingtext;
 
     // Use this for initialization
     void Start()
     {
-		text = GameObject.Find("WaterPlantText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		text = GameObject.Find("WaterPlantText"); // Gets the child object called 3DText.
         gameManagerObject = GameObject.Find("GameManager");
 		wateringCan = GameObject.Find ("wateringCan");
 		//weedPlant = GameObject.Find ("WeedPlant");
@@ -29,12 +30,12 @@ public class StickyNoteWaterPlants : MonoBehaviour
     {
         // ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
         // Disable sticky note, but do not destroy it. It's needed by the GameManager.
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        //gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
-
+		gameObject.GetComponent<MeshRenderer> ().material = red;
         // Enable box colliders needed.
 		wateringCan.GetComponent<BoxCollider>().enabled = true;
-		text.Activate ();
+		text.GetComponent<MeshRenderer> ().enabled = true;
 		//weedPlant.GetComponent<BoxCollider>().enabled = true;
         //coffeeTableBooks.GetComponent<BoxCollider>().enabled = true;
 

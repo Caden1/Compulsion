@@ -6,11 +6,12 @@ public class SetTableTask : MonoBehaviour {
 
 	private bool onetimeTaskCompletion;
 	private GameManager gameManagerScript;
-	private FloatingText text;
-
+	private GameObject text;
+	private GameObject stickyNote;
 	// Use this for initialization
 	void Start () {
-		text = GameObject.Find ("CheckTableText").GetComponent<FloatingText> ();
+		stickyNote = GameObject.Find ("StickyNote");
+		text = GameObject.Find ("CheckTableText");
 		onetimeTaskCompletion = false;
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 
@@ -22,7 +23,8 @@ public class SetTableTask : MonoBehaviour {
 		{
 			
 			if (HoldAndSetForksKnives.FKSet == true && HoldAndSetPlates.setPlates == true) {
-				text.Deactivate ();
+				text.GetComponent<MeshCollider> ().enabled = false;
+				stickyNote.GetComponent<MeshRenderer> ().enabled = false;
 				gameManagerScript.NormalTaskCompleted ();
 				onetimeTaskCompletion = true;
 			}

@@ -20,9 +20,10 @@ public class StickyNoteMakeDinner : MonoBehaviour
     private Coroutine cor2;
 
     private FloatingText floatingtext;
-	private FloatingText Everyday1text;
+	private GameObject Everyday1text;
 
 	public AudioClip clip;
+	public Material red;
 
     // Use this for initialization
     void Start()
@@ -33,7 +34,7 @@ public class StickyNoteMakeDinner : MonoBehaviour
 		sandwhiches = GameObject.Find ("2SandwichesPickUp");
         kitchenTableCollider = GameObject.Find("KitchenTableCollider");
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
-		Everyday1text =  GameObject.Find("TempText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		Everyday1text =  GameObject.Find("TempText"); // Gets the child object called 3DText.
 		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
     }
 
@@ -42,11 +43,13 @@ public class StickyNoteMakeDinner : MonoBehaviour
         // ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
 		/*
         // Disable sticky note, but do not destroy it. It's needed by the GameManager.
-        */gameObject.GetComponent<MeshRenderer>().enabled = false;
+        */
+		//gameObject.GetComponent<MeshRenderer>().enabled = false;
 
 
-		//gameObject.GetComponent<BoxCollider>().enabled = false;
-		Everyday1text.Activate ();
+		gameObject.GetComponent<BoxCollider>().enabled = false;
+		gameObject.GetComponent<MeshRenderer> ().material = red;
+		Everyday1text.GetComponent<MeshRenderer> ().enabled = true;
         // Enable box colliders needed.
 
 		if (ScrubTableWithSponge.scrubTable == false) {

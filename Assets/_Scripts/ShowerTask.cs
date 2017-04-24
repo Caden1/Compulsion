@@ -5,12 +5,16 @@ using UnityEngine;
 public class ShowerTask : MonoBehaviour {
 	private ParticleSystem water;
 	private GameManager gameManagerScript;
+	private GameObject text;
+	private GameObject stickyNote;
 
 
 	// Use this for initialization
 	void Start () {
 		gameManagerScript = GameObject.Find("GameManager").GetComponent<GameManager>();
 		water = GameObject.Find("WaterParticleEffectShower").GetComponent<ParticleSystem>();
+		text = GameObject.Find ("ShowerText");
+		stickyNote = GameObject.Find ("StickyNoteGoShower");
 		water.Stop();
 		
 	}
@@ -32,6 +36,8 @@ public class ShowerTask : MonoBehaviour {
 	{
 		water.Stop ();
 		gameManagerScript.NormalTaskCompleted ();
+		stickyNote.GetComponent<MeshRenderer> ().enabled = false;
+		text.GetComponent<MeshRenderer> ().enabled = false;
 		gameObject.GetComponent<BoxCollider> ().enabled = false;
 
 	}

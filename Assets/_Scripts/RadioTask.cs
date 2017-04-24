@@ -8,7 +8,8 @@ public class RadioTask : MonoBehaviour {
     private BoxCollider knobBox;
     private RadioPower power;
     private BoxCollider powerBox;
-	private FloatingText text;
+	private GameObject text;
+	public Material red;
 
     
 
@@ -18,7 +19,7 @@ public class RadioTask : MonoBehaviour {
         knob.enabled = false;
         power = GameObject.Find("RadioPower").GetComponent<RadioPower>();
         power.enabled = false;
-		text = GameObject.Find("RadioText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		text = GameObject.Find("RadioText"); // Gets the child object called 3DText.
 
         knobBox = GameObject.Find("RadioKnob").GetComponent<BoxCollider>();
         knobBox.enabled = false;
@@ -28,11 +29,12 @@ public class RadioTask : MonoBehaviour {
 	
     private void Activate()
     {
+		gameObject.GetComponent<MeshRenderer> ().material = red;
         knob.enabled = true;
         power.enabled = true;
         knobBox.enabled = true;
         powerBox.enabled = true;
-		text.Activate ();
+		text.GetComponent<MeshRenderer> ().enabled = true;
 
     }
 

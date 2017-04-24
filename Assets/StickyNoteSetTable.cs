@@ -7,7 +7,8 @@ public class StickyNoteSetTable : MonoBehaviour {
 	private GameObject gameManagerObject;
 	private GameObject sponge;
 	private GameObject plates;
-	public FloatingText text;
+	public GameObject text;
+	public Material Red;
 	private GameObject forksandKnives;
 	private GameObject kitchenTableCollider;
 	private KitchenTableCollider kitchenTableColliderScript;
@@ -17,7 +18,7 @@ public class StickyNoteSetTable : MonoBehaviour {
 	// Use this for initialization
 	void Start()
 	{
-		text = GameObject.Find ("CheckTableText").GetComponent<FloatingText> ();
+		text = GameObject.Find ("CheckTableText");
 		gameManagerObject = GameObject.Find("GameManager");
 		sponge = GameObject.Find("Sponge");
 		plates = GameObject.Find ("2PlatesPickup");
@@ -30,9 +31,10 @@ public class StickyNoteSetTable : MonoBehaviour {
 	{
 		// ADD SOUND EFFECT FOR RIPPING OFF STICKY NOTE
 		// Disable sticky note, but do not destroy it. It's needed by the GameManager.
-		gameObject.GetComponent<MeshRenderer>().enabled = false;
+		//gameObject.GetComponent<MeshRenderer>().enabled = false;
 		gameObject.GetComponent<BoxCollider>().enabled = false;
-		text.Activate ();
+		text.GetComponent<MeshRenderer> ().enabled = true;
+		gameObject.GetComponent<MeshRenderer> ().material = Red;
 
 		// Enable box colliders needed.
 		if (ScrubTableWithSponge.scrubTable == false) {
