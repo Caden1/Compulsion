@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     private Queue<AudioClip> queuedSounds;              // A queue of sounds in case multiple sound requests are made to this script
     private Dictionary<GameObject, OCDTask> activeOCD;  // A dictionary of currently running OCD effects and relevent data about each one.
     private OCDEffectManager OEF;                       // Reference to the OCD Effect Manager
+    private StartOfGameScript fade;                     // Contains the methods to end and win game
 
     private static readonly Object ocdLock = new Object();   // Lock for OCD related class members
     private static readonly Object soundLock = new Object(); // Lock for sound related class memeber
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
         OEF = GameObject.FindGameObjectWithTag("OCDManager").GetComponent<OCDEffectManager>();
         // start game
         StartCoroutine(StartGame());
+        fade = GameObject.Find("Player").GetComponent<StartOfGameScript>();
 
     }
 
@@ -324,15 +326,7 @@ public class GameManager : MonoBehaviour
         {
             // STOP STUFF
             StopAllCoroutines();
-
-            if (win)
-            {
-                // Start Win sequence
-            }
-            else
-            {
-                // Start Loss sequence
-            }
+            fade.EndGame(win);
         }
     }
 }

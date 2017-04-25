@@ -11,15 +11,10 @@ public class CameraFadeInOut : MonoBehaviour
     void Start()
     {
         temp = fadePane.color;
-        temp.a = 0f;
+        temp.a = 1f;
         fadePane.color = temp;
     }
     bool x = true;
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     public IEnumerator FadeIn()
     {
@@ -33,7 +28,7 @@ public class CameraFadeInOut : MonoBehaviour
             }
             fadePane.color = temp;
 
-            yield return new WaitForSeconds(.03f);
+            yield return new WaitForSeconds(.01f);
         }
         x = false;
     }
@@ -49,7 +44,7 @@ public class CameraFadeInOut : MonoBehaviour
             }
             fadePane.color = temp;
 
-            yield return new WaitForSeconds(.03f);
+            yield return new WaitForSeconds(.01f);
         }
         x = true;
     }
