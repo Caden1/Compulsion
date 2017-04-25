@@ -107,8 +107,6 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void CheckWinState()
     {
-		Debug.Log ("Tasks Completed: " + taskCompleteCount);
-		Debug.Log ("Task Count: " + totalTaskCount);
         if (taskCompleteCount == totalTaskCount && ocdCurrentCount == 0)
         {
             lock (soundLock) { queuedSounds.Clear(); }
@@ -196,12 +194,9 @@ public class GameManager : MonoBehaviour
                 GameOver(false);
             }
 
-            Debug.Log("StressLevel = " + stressLevel);
             // UPDATE OCDEffectManager about new level
             OEF.SetStressLevel(stressLevel);
         }
-        Debug.Log("Influence = " + totalInfluence);
-
     }
 
     /// <summary>

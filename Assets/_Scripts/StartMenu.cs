@@ -1,13 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -19,7 +16,10 @@ public class StartMenu : MonoBehaviour {
 	public void StartGame()
 	{
 
-		Application.LoadLevel(Application.loadedLevel+1);
+		//Application.LoadLevel(Application.loadedLevel+1);
+        SceneManager.LoadScene("MainScene2");
+        Time.timeScale = 1;
+        AudioListener.pause = false;
 
 	}
 
@@ -29,6 +29,7 @@ public class StartMenu : MonoBehaviour {
 	}
 	public void About()
 	{
-		Application.LoadLevel ("About");
+        SceneManager.LoadScene("About");
+        //Application.LoadLevel ("About");
 	}
 }

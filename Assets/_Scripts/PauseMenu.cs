@@ -5,11 +5,7 @@ using UnityEngine.UI;
 
 public class WHATTHEFUCK : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		if (Input.GetKeyDown (KeyCode.Escape)) {
@@ -29,7 +25,7 @@ public class WHATTHEFUCK : MonoBehaviour {
 
 	public void Restart()
 	{
-		Application.LoadLevel (Application.loadedLevel );
+		//Application.LoadLevel (Application.loadedLevel );
 
 	}
 

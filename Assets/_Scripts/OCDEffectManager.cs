@@ -107,7 +107,7 @@ public class OCDEffectManager : MonoBehaviour
     // Blur and Breathing every 20 seconds
     private void LevelOne()
     {
-        timeUntilEffect = 20f;
+        timeUntilEffect = 10f;
         timeSinceLastEffect += Time.deltaTime;
         if (timeSinceLastEffect >= timeUntilEffect)
         {
@@ -119,7 +119,7 @@ public class OCDEffectManager : MonoBehaviour
     // Blur, Breathing, and slight Vignette every 10 seconds
     private void LevelTwo()
     {
-        timeUntilEffect = 10f;
+        timeUntilEffect = 5f;
         timeSinceLastEffect += Time.deltaTime;
         if (timeSinceLastEffect >= timeUntilEffect)
         {
@@ -133,7 +133,7 @@ public class OCDEffectManager : MonoBehaviour
     // Blur, Breathing, and heavy Vignette every 8 seconds
     private void LevelThree()
     {
-        timeUntilEffect = 8f;
+        timeUntilEffect = 5f;
         timeSinceLastEffect += Time.deltaTime;
         if (timeSinceLastEffect >= timeUntilEffect)
         {
@@ -146,7 +146,7 @@ public class OCDEffectManager : MonoBehaviour
     // Blur, Breathing, heavy Vignette, every 8 seconds and constant medium ear riging
     private void LevelFour()
     {
-        timeUntilEffect = 8f;
+        timeUntilEffect = 5f;
         timeSinceLastEffect += Time.deltaTime;
         if (timeSinceLastEffect >= timeUntilEffect)
         {
