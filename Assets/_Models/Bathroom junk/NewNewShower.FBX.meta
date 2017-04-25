@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: 6f02c9a54d9519547b64a7660af2f116
+timeCreated: 1493090770
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bottensil
+    100002: Bur
+    100004: DuschMunst
+    100006: "DuschSt\xE5n0"
+    100008: "DuschSt\xE5ng"
+    100010: Glas
+    100012: Handtag
+    100014: Handtag0
+    100016: Handtag0.Handtag03
+    100018: Kar
+    100020: KranVred
+    100022: //RootNode
+    100024: Slang
+    100026: "Tv\xE5lkopp"
+    400000: Bottensil
+    400002: Bur
+    400004: DuschMunst
+    400006: "DuschSt\xE5n0"
+    400008: "DuschSt\xE5ng"
+    400010: Glas
+    400012: Handtag
+    400014: Handtag0
+    400016: Handtag0.Handtag03
+    400018: Kar
+    400020: KranVred
+    400022: //RootNode
+    400024: Slang
+    400026: "Tv\xE5lkopp"
+    2300000: Bottensil
+    2300002: Bur
+    2300004: DuschMunst
+    2300006: "DuschSt\xE5n0"
+    2300008: "DuschSt\xE5ng"
+    2300010: Glas
+    2300012: Handtag
+    2300014: Handtag0
+    2300016: Handtag0.Handtag03
+    2300018: Kar
+    2300020: KranVred
+    2300022: Slang
+    2300024: "Tv\xE5lkopp"
+    3300000: Bottensil
+    3300002: Bur
+    3300004: DuschMunst
+    3300006: "DuschSt\xE5n0"
+    3300008: "DuschSt\xE5ng"
+    3300010: Glas
+    3300012: Handtag
+    3300014: Handtag0
+    3300016: Handtag0.Handtag03
+    3300018: Kar
+    3300020: KranVred
+    3300022: Slang
+    3300024: "Tv\xE5lkopp"
+    4300000: Bur
+    4300002: Kar
+    4300004: Glas
+    4300006: "DuschSt\xE5ng"
+    4300008: "DuschSt\xE5n0"
+    4300010: "Tv\xE5lkopp"
+    4300012: Handtag
+    4300014: KranVred
+    4300016: DuschMunst
+    4300018: Slang
+    4300020: Bottensil
+    4300022: Handtag0
+    4300024: Handtag0.Handtag03
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
