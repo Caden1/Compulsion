@@ -26,7 +26,19 @@ public class PausedMenu : MonoBehaviour {
 		
 	}
 
-	public void OnPauseButtonClicked()
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+    }
+
+    private void OnDisable()
+    {
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+    }
+
+    public void OnPauseButtonClicked()
 	{
 		//Only need this code if we're not mapping pause to a button
 		/*Time.timeScale =0;
