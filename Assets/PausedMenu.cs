@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PausedMenu : MonoBehaviour {
 	public GameObject PauseMenu;
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = false;
@@ -17,6 +19,7 @@ public class PausedMenu : MonoBehaviour {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
 			Time.timeScale =0;
+			AudioListener.pause = true;
 			GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = true;
 
 		}
@@ -40,6 +43,7 @@ public class PausedMenu : MonoBehaviour {
 		//Cursor.lockState = CursorLockMode.None;
 		Time.timeScale =1;
 		GameObject.Find ("PausedMenu").GetComponent<Canvas> ().enabled = false;
+		AudioListener.pause = false;
 
 	}
 	public void OnExitButtonClicked()

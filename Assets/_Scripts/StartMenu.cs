@@ -27,5 +27,8 @@ public class StartMenu : MonoBehaviour {
 	{
 		Application.Quit ();
 	}
-
+	public void About()
+	{
+		Application.LoadLevel ("About");
+	}
 }

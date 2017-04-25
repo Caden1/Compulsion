@@ -14,6 +14,7 @@ public class StartOfGameScript : MonoBehaviour {
 
 	// Use this for initialization
 	private void Start () {
+		Time.timeScale = 1;
         speaker = GameObject.Find("GameManager").GetComponent<GameManager>();
         Invoke("PlayClip", SecondsToPlaySound);
         player = GameObject.Find("Player").GetComponent<UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController>();
