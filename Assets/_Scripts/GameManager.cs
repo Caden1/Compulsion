@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void CheckWinState()
     {
+        Debug.Log("taskCompleteCount: " + taskCompleteCount);
         if (taskCompleteCount == totalTaskCount && ocdCurrentCount == 0)
         {
             lock (soundLock) { queuedSounds.Clear(); }
@@ -283,6 +284,7 @@ public class GameManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator MasterGameTimer()
     {
+        startTime = Time.time;
         int timeClipCounter = 0;
         float timeBetweenSounds = timeLeftAudioClips.Length > 0 ?
             gameLength / timeLeftAudioClips.Length :

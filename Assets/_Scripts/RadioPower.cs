@@ -56,10 +56,12 @@ public class RadioPower : MonoBehaviour
 
     public void Activate()
     {
-		//Debug.Log ("Music Playing!");
         if (!oneTime)
-			gameManager.NormalTaskCompleted();
+        {
+            gameManager.NormalTaskCompleted();
             stickyNote.SendMessage("CleanUp");
+            oneTime = true;
+        }
 
         if (cor != null)
             StopCoroutine(cor);
@@ -71,7 +73,7 @@ public class RadioPower : MonoBehaviour
         }
         else
         {
-            speaker.volume = 1;
+            speaker.volume = 0.5f;
             transform.position = on;
         }
 
