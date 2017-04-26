@@ -21,6 +21,8 @@ public class CookCookies : MonoBehaviour
 
     public float cookTime = 10.0f;
 
+	//private BoxCollider uncookedCookiePlacementCollider;
+
     // Use this for initialization
     void Start()
     {
@@ -34,6 +36,8 @@ public class CookCookies : MonoBehaviour
 
         GameObject ovenDoor = GameObject.Find("OvenDoor");
         ovenDoorScript = ovenDoor.GetComponent<OvenDoor>();
+
+		//uncookedCookiePlacementCollider = GameObject.Find ("UncookedCookiePlacement").GetComponent<BoxCollider> ();
 
       //  audio = GetComponent<AudioSource>();
     }
@@ -53,12 +57,13 @@ public class CookCookies : MonoBehaviour
         if (gameObject.name == "UncookedCookies" && uncookedCookies == false)
         {
             SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
+			//uncookedCookiePlacementCollider.enabled = true;
         }
         else if (gameObject.name == "UncookedCookiePlacement" && uncookedCookies == true)
         {
             SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
 
-            uncookedCookiesReference.transform.position = putInOvenPosition.position + new Vector3(-0.4f, -0.05f, 0f); // New position of the uncooked cookies. (in th oven). Needed an offset added to it.
+			uncookedCookiesReference.transform.position = putInOvenPosition.position + new Vector3(0.0f, 0.05f, 0.0f); // New position of the uncooked cookies. (in th oven). Needed an offset added to it.
             uncookedCookiesReference.transform.parent = putInOvenPosition; // Child the uncooked cookies to the collider so the player lets go of it.
             uncookedCookiesReference.name = "PlacedUncookedCookies"; // Rename the object so it cannot be picked up again right away.
             uncookedCookiesReference.transform.GetComponent<GenericPlaySound>().PlaySoundRandomPitch();
@@ -66,6 +71,8 @@ public class CookCookies : MonoBehaviour
             uncookedCookies = false;
 
             startCookingCookies = true;
+
+			//uncookedCookiePlacementCollider.enabled = false;
         }
     }
 
