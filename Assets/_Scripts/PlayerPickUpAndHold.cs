@@ -64,5 +64,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
     public void SetDown()
     {   
         itemsCarried--;
+        if (itemsCarried < 0)
+            itemsCarried = 0;
     }
 }
