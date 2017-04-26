@@ -71,7 +71,7 @@ public class RadioPower : MonoBehaviour
         }
         else
         {
-            speaker.volume = 0.5f;
+            speaker.volume = 0.4f;
             transform.position = on;
         }
 
