@@ -32,4 +32,8 @@ public class StartMenu : MonoBehaviour {
         SceneManager.LoadScene("About");
         //Application.LoadLevel ("About");
 	}
+	public void Back()
+	{
+		SceneManager.LoadScene ("PinakScene");
+	}
 }
