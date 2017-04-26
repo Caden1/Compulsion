@@ -36,6 +36,8 @@ public class StickyNoteMakeDinner : MonoBehaviour
         kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
 		Everyday1text =  GameObject.Find("TempText"); // Gets the child object called 3DText.
 		floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
+		Everyday1text.GetComponent<MeshRenderer> ().enabled = true;
+
     }
 
     public void Activate()
@@ -49,7 +51,6 @@ public class StickyNoteMakeDinner : MonoBehaviour
 
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		gameObject.GetComponent<MeshRenderer> ().material = red;
-		Everyday1text.GetComponent<MeshRenderer> ().enabled = true;
         // Enable box colliders needed.
 
 		if (ScrubTableWithSponge.scrubTable == false) {

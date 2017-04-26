@@ -20,6 +20,7 @@ public class RadioTask : MonoBehaviour {
         power = GameObject.Find("RadioPower").GetComponent<RadioPower>();
         power.enabled = false;
 		text = GameObject.Find("RadioText"); // Gets the child object called 3DText.
+		text.GetComponent<MeshRenderer> ().enabled = true;
 
         knobBox = GameObject.Find("RadioKnob").GetComponent<BoxCollider>();
         knobBox.enabled = false;
@@ -34,7 +35,6 @@ public class RadioTask : MonoBehaviour {
         power.enabled = true;
         knobBox.enabled = true;
         powerBox.enabled = true;
-		text.GetComponent<MeshRenderer> ().enabled = true;
 
     }
 

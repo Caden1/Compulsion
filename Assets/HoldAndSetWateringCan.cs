@@ -30,32 +30,14 @@ public class HoldAndSetWateringCan : MonoBehaviour {
 			//WateringCanRef.transform.rotation = Quaternion.Euler (-30, 33, transform.rotation.z);
 			SendMessage("PickUpAndHold", gameObject, SendMessageOptions.DontRequireReceiver);
 			SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-			//GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.4f); // Play sound for picking up books
-			//booksCoffeeTablePlaceCollider.enabled = true; // Enable the placement box collider.
-			//Debug.Log ("Here!");
+
+
 		}
-	/*	else if (gameObject.name == "BooksCoffeeTablePlace" && water == true)
-		{
-			//Debug.Log ("Here!!!");
-			SendMessage("SetDown", SendMessageOptions.DontRequireReceiver);
-
-			//Destroy(coffeeTableBooksReference); // Destroy the original coffe table books.
-
-			gameObject.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
-			gameObject.transform.GetChild(0).GetComponent<GenericPlaySound>().PlaySoundRandomPitch(.4f);
-			gameObject.transform.GetChild(1).GetComponent<MeshRenderer>().enabled = true;
-			gameObject.transform.GetChild(2).GetComponent<MeshRenderer>().enabled = true;
-			gameObject.transform.GetChild(3).GetComponent<MeshRenderer>().enabled = true;
-			water = false;
-
-			booksCoffeeTablePlaceCollider.enabled = false; // Disable the placement box collider.
-
-			livingRoomTrigger2Script.CleanUp();
-		}*/
 	}
 
 	public void SetVarTrue()
 	{
 		water = true;
 	}
+
 }

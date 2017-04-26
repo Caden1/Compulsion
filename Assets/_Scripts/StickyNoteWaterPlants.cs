@@ -21,6 +21,7 @@ public class StickyNoteWaterPlants : MonoBehaviour
 		text = GameObject.Find("WaterPlantText"); // Gets the child object called 3DText.
         gameManagerObject = GameObject.Find("GameManager");
 		wateringCan = GameObject.Find ("wateringCan");
+		text.GetComponent<MeshRenderer> ().enabled = true;
 		//weedPlant = GameObject.Find ("WeedPlant");
         //coffeeTableBooks = GameObject.Find("BooksCoffeeTablePickUp");
         //floatingtext = transform.Find("3DText").GetComponent<FloatingText>(); // Gets the child object called 3DText.
@@ -35,7 +36,6 @@ public class StickyNoteWaterPlants : MonoBehaviour
 		gameObject.GetComponent<MeshRenderer> ().material = red;
         // Enable box colliders needed.
 		wateringCan.GetComponent<BoxCollider>().enabled = true;
-		text.GetComponent<MeshRenderer> ().enabled = true;
 		//weedPlant.GetComponent<BoxCollider>().enabled = true;
         //coffeeTableBooks.GetComponent<BoxCollider>().enabled = true;
 

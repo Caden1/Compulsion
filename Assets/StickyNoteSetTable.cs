@@ -25,6 +25,7 @@ public class StickyNoteSetTable : MonoBehaviour {
 		forksandKnives = GameObject.Find ("ForkKnifePickup");
 		kitchenTableCollider = GameObject.Find("KitchenTableCollider");
 		kitchenTableColliderScript = GameObject.Find("KitchenTableCollider").GetComponent<KitchenTableCollider>();
+		text.GetComponent<MeshRenderer> ().enabled = true;
 	}
 
 	public void Activate()
@@ -33,7 +34,6 @@ public class StickyNoteSetTable : MonoBehaviour {
 		// Disable sticky note, but do not destroy it. It's needed by the GameManager.
 		//gameObject.GetComponent<MeshRenderer>().enabled = false;
 		gameObject.GetComponent<BoxCollider>().enabled = false;
-		text.GetComponent<MeshRenderer> ().enabled = true;
 		gameObject.GetComponent<MeshRenderer> ().material = Red;
 
 		// Enable box colliders needed.

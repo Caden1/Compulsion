@@ -58,7 +58,7 @@ public class PlayerPickUpAndHold : MonoBehaviour
             readyToLerp = false;
         }
         
-        //Debug.Log("Items Carried: " + itemsCarried);
+        Debug.Log("Items Carried: " + itemsCarried);
     }
 
     public void SetDown()

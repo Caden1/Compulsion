@@ -12,6 +12,7 @@ public class StickyNoteGoShower : MonoBehaviour {
 	void Start () {
 		ShowerArea = GameObject.Find ("ShowerArea");
 		text = GameObject.Find ("ShowerText");
+		text.GetComponent<MeshRenderer> ().enabled = true;
 		
 	}
 	
@@ -26,7 +27,6 @@ public class StickyNoteGoShower : MonoBehaviour {
 		//gameObject.GetComponent<MeshRenderer>().enabled = false;
 		gameObject.GetComponent<BoxCollider>().enabled = false;
 		gameObject.GetComponent<MeshRenderer> ().material = red;
-		text.GetComponent<MeshRenderer> ().enabled = true;
 		ShowerArea.GetComponent<BoxCollider> ().enabled = true;
 	}
 }
