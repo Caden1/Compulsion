@@ -69,4 +69,9 @@ public class TVSwitch : MonoBehaviour {
 
         isOn = !isOn;
     }
+
+    public bool IsTVPlaying()
+    {
+        return isOn;
+    }
 }

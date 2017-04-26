@@ -47,12 +47,14 @@ public class StartOfGameScript : MonoBehaviour {
 
     private void WinSound()
     {
+        speaker.ClearSounds();
         speaker.QueuePlayerSpeech(winClip);
         Invoke("GoBackToMenu", winClip.length);
     }
 
     private void LoseSound()
     {
+        speaker.ClearSounds();
         speaker.QueuePlayerSpeech(loseClip);
         Invoke("GoBackToMenu", loseClip.length);
     }

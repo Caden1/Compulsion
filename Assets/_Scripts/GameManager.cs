@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
     private Dictionary<GameObject, OCDTask> activeOCD;  // A dictionary of currently running OCD effects and relevent data about each one.
     private OCDEffectManager OEF;                       // Reference to the OCD Effect Manager
     private StartOfGameScript fade;                     // Contains the methods to end and win game
+    private AudioSource radio;                           // Allows us to turn off the radio
+    private AudioSource tv;                                // Allows this to turn off the tv
+    private AudioSource sink;                           // Allows us to silence the water effect
 
     private static readonly Object ocdLock = new Object();   // Lock for OCD related class members
     private static readonly Object soundLock = new Object(); // Lock for sound related class memeber
@@ -99,6 +102,9 @@ public class GameManager : MonoBehaviour
         // start game
         StartCoroutine(StartGame());
         fade = GameObject.Find("Player").GetComponent<StartOfGameScript>();
+        radio = GameObject.Find("RadioPower").GetComponent<AudioSource>();
+        tv = GameObject.Find("TVScreen").GetComponent<AudioSource>();
+        sink = GameObject.Find("SinkKnob").GetComponent<AudioSource>();
 
     }
 
@@ -218,6 +224,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void ClearSounds()
+    {
+        lock (soundLock) { queuedSounds.Clear(); }
+    }
+
     /// <summary>
     /// Will play all of the AudioClips stored in queuedSounds.
     /// </summary>
@@ -270,7 +281,7 @@ public class GameManager : MonoBehaviour
                     ocdCurrentCount++;
                     totalInfluence += activeOCD[randomOCDEvents[randomInt]].Influence;
                 }
-					
+
                 randomOCDEvents[randomInt].SendMessage("Activate");
                 yield return new WaitForSeconds(wait);
             }
@@ -319,11 +330,13 @@ public class GameManager : MonoBehaviour
     /// <param name="win">Did player win?</param>
     private void GameOver(bool win)
     {
-        lock (soundLock)
-        {
-            // STOP STUFF
-            StopAllCoroutines();
-            fade.EndGame(win);
-        }
+        // STOP STUFF
+        StopCoroutine(MasterGameTimer());
+        StopCoroutine(RandomOCDAttack());
+        radio.Stop();
+        tv.Stop();
+        sink.Stop();
+
+        fade.EndGame(win);
     }
 }

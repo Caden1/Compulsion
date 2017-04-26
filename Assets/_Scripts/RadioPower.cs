@@ -22,7 +22,6 @@ public class RadioPower : MonoBehaviour
     private bool oneTime;
     private GameObject stickyNote;
 
-
     // Use this for initialization
     private void Start()
     {
@@ -57,10 +56,9 @@ public class RadioPower : MonoBehaviour
     public void Activate()
     {
         if (!oneTime)
-        {
-            gameManager.NormalTaskCompleted();
-            stickyNote.SendMessage("CleanUp");
+        {          
             oneTime = true;
+            Invoke("FinishTask", 2f);
         }
 
         if (cor != null)
@@ -99,5 +97,16 @@ public class RadioPower : MonoBehaviour
     public void RestartMusic()
     {
         speaker.Play();
+    }
+
+    public bool IsMusicPlaying()
+    {
+        return isOn;
+    }
+
+    private void FinishTask()
+    {
+        gameManager.NormalTaskCompleted();
+        stickyNote.SendMessage("CleanUp");
     }
 }
